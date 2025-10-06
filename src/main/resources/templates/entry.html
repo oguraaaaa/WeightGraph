@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>スタートページ</title>
+<style>
+  /* 背景色をオレンジに */
+  body {
+    background-color:	#FFDAB9;
+    margin: 0;
+    height: 100vh; /* 画面高さいっぱい */
+    display: flex;
+    justify-content: center; /* 横方向中央寄せ */
+    align-items: center;     /* 縦方向中央寄せ */
+    font-family: Arial, sans-serif;
+  }
+  .container {
+      text-align: center;
+    }
+  a {
+    font-size: 2.0rem;      /* 文字サイズ大きく */
+    color: white;           /* 見やすい白色に */
+    text-decoration: none;  /* 下線を消す */
+    font-weight: bold;
+    padding: 15px 30px;
+    border: 2px solid white;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
+	display: inline-block;
+  }
+
+  a:hover {
+    background-color: white;
+    color: orange;
+  }
+  img {
+     margin-top: 30px;  /* リンクから少し間隔を空ける */
+     max-width: 300px;
+     height: auto;
+   }
+</style>
+</head>
+<body>
+		
+		<div class = "container">
+		<a th:href="@{/weight/goalSet}">目標を設定してダイエットを始める！</a>
+		<br>
+		<img src="/images/ouen_jersey_woman5_yellow.png" alt="応援画像">
+		
+		<div th:if="${param.error}">
+				<p style="color:red;">usernameまたはpasswordが違います</p>
+				</div>
+				<!--ログアウト表示-->
+				<div th:if="${param.logout}">
+					<p style="color:blue">ログアウトしました</p>
+				</div>
+				<form th:action="@{/authentication}" method ="post" th:object="${loginForm}">
+					<div><!--ユーザー名-->
+					<label for="usernameInput">usename</label>
+				<input type="text" th:field="*{usernameInput}">
+			</div>
+			<div><!--パスワード-->
+				<label for="passwordInput">password</label>
+				<input type="password" th:field="*{passwordInput}">
+			</div>
+			<div>
+				<input type="submit" value="login">
+			</div>
+				</form>	
+		
+	<!--	<a th:href="@{/weight/form}">今日の体重を記録する</a>
+		<br>
+		<br>
+		<a th:href="@{/weight/main}">記録を見る</a>
+	-->
+		</div>
+</body>
+</html>

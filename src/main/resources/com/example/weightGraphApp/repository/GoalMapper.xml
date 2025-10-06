@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.weightGraphApp.repository.GoalMapper">
+
+<select id = "insert">
+INSERT INTO goal(goalWeight,goalFat,startDay,memo,goalDay)
+VALUES
+(#{goalWeight},#{goalFat},CURRENT_TIMESTAMP,#{memo},#{goalDay})
+</select> 
+
+<!-- 最新データのみ取得 -->
+	<select id ="leatest" resultType="com.example.weightGraphApp.entity.Goal" >
+		SELECT id,goalWeight,goalFat,startDay,memo,goalDay 
+		FROM goal ORDER BY id DESC FETCH NEXT 1 ROWS ONLY;	
+	</select>
+
+</mapper>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>記録画面</title>
+</head>
+<body>
+		<p th:if="${message}" th:text="${message}"
+			style="color:blue;">初回案内メッセージ
+			</p>
+	<!--タイトル：登録 or 編集-->
+		<h2 th:if="${recordWeightForm.isNew}">今日の記録</h2>
+		<h2 th:unless="${recordWeightForm.isNew}">記録の編集</h2>
+		<!--アクション：登録 or 編集-->
+		<form th:action="${recordWeightForm.isNew}?@{/weight/save}:@{/weight/update}"
+			th:object="${recordWeightForm}" method="post">
+		<input type="hidden" th:field="*{id}">
+		<table>
+			<tr>
+				<th>日付</th>
+					<td>
+					<input type="date" th:field="*{recordDay}">
+					<!--日付用：バリデーションエラー表示-->
+					<span th:if="${#fields.hasErrors('recordDay')}"
+					th:errors="*{recordDay}" style="color:red">
+						エラーがあれば表示
+					</span>			
+					</td>
+				</tr>								
+			
+				<tr>
+					<th>体重</th>
+					<td>
+						<input type="text" th:field="*{weight}">
+						<!--体重用：バリデーションエラー表示-->
+					<span th:if="${#fields.hasErrors('weight')}"
+						th:errors="*{weight}" style="color:red">
+					エラーがあれば表示
+				</span>				
+					</td>
+				</tr>
+				<tr>
+					<th>体脂肪率</th>
+					<td>
+						<input type="text" th:field="*{fat}">
+						<!--体脂肪用：バリデーションエラー表示-->
+						<span th:if="${#fields.hasErrors('fat')}"
+							th:errors="*{fat}" style="color:red">
+						エラーがあれば表示
+						</span>			
+					</td>
+				</tr>						
+				<tr>					
+					<th>メモ</th>
+				<td>
+					<textarea rows="3" cols="30" th:field="*{memo}">						
+					</textarea>
+					<!--詳細用：バリデーションエラー表示-->
+						<span th:if="${#fields.hasErrors('memo')}"
+					th:errors="*{memo}" style="color:red;">
+					エラーがあれば表示
+					</span>				
+				</td>
+				</tr>
+			</table>
+				<!--ボタン：登録　or　編集-->
+				<input th:if="${recordWeightForm.isNew}" type="submit" value="登録">			
+				<input th:unless="${recordWeightForm.isNew}" type="submit" value="更新">
+			</form>
+			<a th:href="@{/weight/goalSet}">戻る</a>
+			<a th:href="@{/weight/noset}">記録せずに進む</a>		
+		
+		
+</body>
+</html>

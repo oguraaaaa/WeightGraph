@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.example.weightGraphApp.repository.WeightRecordMapper">
+	<!-- 全件検索 -->
+	<select id ="showAll" resultType="com.example.weightGraphApp.entity.WeightRecord">
+		SELECT id,recordDay,weight,fat, memo
+		FROM weightRecords ORDER BY recordDay DESC
+	</select>
+	
+	<!-- １件検索 -->
+	<select id ="show" resultType="com.example.weightGraphApp.entity.WeightRecord">
+		SELECT id,recordDay,weight,fat,memo
+		FROM weightRecords WHERE id = #{id}
+	</select>
+	
+	<!-- 最新データのみ取得 -->
+	<select id ="leatest" resultType="com.example.weightGraphApp.entity.WeightRecord" >
+		SELECT id,recordDay,weight,fat,memo
+		FROM weightRecords ORDER BY id DESC FETCH NEXT 1 ROWS ONLY;	
+	</select>
+	
+	<!-- 登録 -->
+	<insert id ="insert">
+		INSERT INTO weightRecords(recordDay,weight,fat,memo)
+		VALUES
+		(#{recordDay},#{weight},#{fat},#{memo})
+	</insert>
+	
+	<!-- 更新 -->
+	<update id="update">
+		UPDATE weightRecords SET weight = #{weight},fat = #{fat},memo = #{memo},
+		recordDay = #{recordDay} WHERE id = #{id}
+	</update>
+	
+	<!-- 削除 -->
+	<delete id = "delete">
+		DELETE FROM weightRecords WHERE id = #{id}
+	</delete>		
+	
+</mapper>

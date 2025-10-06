@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.weightGraphApp.repository.UserMapper">
+
+<select id = "insert">
+INSERT INTO user(name,hight)
+VALUES
+(#{name},#{hight})
+</select> 
+
+<!-- 最新データのみ取得 -->
+	<select id ="showHight" resultType="com.example.weightGraphApp.entity.User" >
+		SELECT hight 
+		FROM user;	
+	</select>
+
+<delete id = "delete">
+		DELETE * FROM user WHERE id = #{id}
+	</delete>		
+
+</mapper>
