@@ -15,6 +15,7 @@ import com.example.weightGraphApp.entity.Goal;
 import com.example.weightGraphApp.entity.WeightRecord;
 import com.example.weightGraphApp.form.GoalSetForm;
 import com.example.weightGraphApp.form.RecordWeightForm;
+import com.example.weightGraphApp.form.UserForm;
 import com.example.weightGraphApp.helper.GoalHelper;
 import com.example.weightGraphApp.helper.WeightHelper;
 import com.example.weightGraphApp.service.GoalService;
@@ -29,6 +30,12 @@ public class weightAppController {
 	
 	private final WeightGraphService weightGraph;
 	private final GoalService goalService;
+	
+	@GetMapping("/userForm")
+	public String userForm(@ModelAttribute UserForm form){
+		form.setIsNew(true);
+		return "userForm";
+	}
 	
 	@GetMapping("/noset")
 	public String nosetStart() {

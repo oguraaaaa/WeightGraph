@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserForm {	
-	private String name;
+	private String displayName;
 	private double hight;
 	private Boolean isNew;
 }

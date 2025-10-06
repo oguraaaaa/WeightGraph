@@ -35,7 +35,7 @@ CREATE TABLE goal(
 	--開始日 
 	startDay timestamp without time zone
 );
-/**
+
 --テーブルが存在したら削除する
 DROP TABLE IF EXISTS user;
 
@@ -47,7 +47,7 @@ CREATE TABLE user(
 	name varchar,
 	--身長:NUll不可
 	hight DECIMAL
-*/	
+	);
 
 --権限用のENUM型
 CREATE TYPE role AS ENUM('ADMIN','user');
@@ -63,5 +63,8 @@ CREATE TABLE authentications(
 	authority role NOT NULL,
 	-- 表示名
 	displayname VARCHAR(50) NOT NULL
+	--外部キー
+	user_id  REFERENCES user(id)
+
 	);	
 
