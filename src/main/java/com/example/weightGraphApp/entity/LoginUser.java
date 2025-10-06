@@ -15,15 +15,32 @@ public class LoginUser extends User{
 	
 	/** 最低限の情報を保持したUserDetails
 	* 実装クラスUserを作成する */
+	
+	
 	public LoginUser(String username,String password,
 			Collection<? extends GrantedAuthority>authorities,
 			String displayname) { // 【追加部分】displaynameを追加
 		super(username,password,authorities);
-		this.displayName = displayname;
+		setDisplayName(displayName);
 	}
+	
+	
+	
 	public String getDisplayname() {
 		return displayName;		
 		}
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public void setHight(Double hight) {
+		this.hight = hight;
+	}
+
 	public Double getHight() {
 		return hight;
 	}

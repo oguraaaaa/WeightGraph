@@ -44,7 +44,7 @@
 						<th>ログイン用:username</th>
 						<td>
 							<input type="text" th:field="*{username}" placeholder="3～10文字で入力">
-							<!--体脂肪用：バリデーションエラー表示-->
+							<!--username用：バリデーションエラー表示-->
 							<span th:if="${#fields.hasErrors('username')}"
 								th:errors="*{username}" style="color:red">
 							エラーがあれば表示
@@ -55,7 +55,7 @@
 						<th>ログイン用:passworrd</th>
 							<td>
 						<input type="text" th:field="*{password}" placeholder="3～10文字で入力">
-						<!--体脂肪用：バリデーションエラー表示-->
+						<!--password用：バリデーションエラー表示-->
 						<span th:if="${#fields.hasErrors('password')}"
 						　th:errors="*{password}" style="color:red">
 						　エラーがあれば表示

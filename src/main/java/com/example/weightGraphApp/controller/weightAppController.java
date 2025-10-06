@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.weightGraphApp.entity.Authentication;
 import com.example.weightGraphApp.entity.Goal;
+import com.example.weightGraphApp.entity.User;
 import com.example.weightGraphApp.entity.WeightRecord;
 import com.example.weightGraphApp.form.GoalSetForm;
 import com.example.weightGraphApp.form.RecordWeightForm;
 import com.example.weightGraphApp.form.UserForm;
 import com.example.weightGraphApp.helper.GoalHelper;
+import com.example.weightGraphApp.helper.UserHelper;
 import com.example.weightGraphApp.helper.WeightHelper;
 import com.example.weightGraphApp.service.GoalService;
+import com.example.weightGraphApp.service.UserService;
 import com.example.weightGraphApp.service.WeightGraphService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,12 +34,30 @@ public class weightAppController {
 	
 	private final WeightGraphService weightGraph;
 	private final GoalService goalService;
+	private final UserService userService;
 	
 	@GetMapping("/userForm")
 	public String userForm(@ModelAttribute UserForm form){
 		form.setIsNew(true);
 		return "userForm";
 	}
+	
+	@PostMapping("/user/save")
+	public String usersave(@Validated UserForm form,BindingResult bindingResult,RedirectAttributes attributes) {
+		if(bindingResult.hasErrors()) {
+			form.setIsNew(true);
+			return "userForm";
+		}
+		
+		attributes.addFlashAttribute("message","ユーザー登録しました。続けて目標を設定しましょう！");
+		User user = UserHelper.convertUser(form);
+		userService.insert(user);
+		Authentication authentication = UserHelper.convertAuth(form);
+		
+		
+		return "redirect:/weight/goalSet";
+	}
+	
 	
 	@GetMapping("/noset")
 	public String nosetStart() {
