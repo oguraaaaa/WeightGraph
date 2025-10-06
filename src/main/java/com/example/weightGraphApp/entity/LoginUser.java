@@ -9,8 +9,8 @@ public class LoginUser extends User{
 	
 	private String displayName;
 	private Double hight;
-	private Goal goal;
-	private WeightRecord weightRecord;
+//	private Goal goal;
+//	private WeightRecord weightRecord;
 	private Double limitBw;
 	
 	/** 最低限の情報を保持したUserDetails
@@ -27,12 +27,12 @@ public class LoginUser extends User{
 	public Double getHight() {
 		return hight;
 	}
-	public Goal getGoal() {
-		return goal;
-	}
-	public WeightRecord getWeightRecord() {
-		return weightRecord;
-	}
+//	public Goal getGoal() {
+//		return goal;
+//	}
+//	public WeightRecord getWeightRecord() {
+//		return weightRecord;
+//	}
 	public Double getLimitBw() {
 		return limitBw;
 	}

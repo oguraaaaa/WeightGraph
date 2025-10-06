@@ -2,9 +2,74 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ユーザー情報入力画面</title>
 </head>
 <body>
-
+	
+	<p th:if="${message}" th:text="${message}"
+				style="color:blue;">初回案内メッセージ
+				</p>
+		<!--タイトル：登録 or 編集-->
+			<h2 th:if="${userForm.isNew}">自分の情報を入力</h2>
+			<!--アクション：登録 or 編集-->
+			<form th:action="@{/weight/user/save}"
+				th:object="${userForm}" method="post">
+			<input type="hidden" th:field="*{id}">
+			<table>
+				<tr>
+					<th>名前</th>
+						<td>
+						<input type="text" th:field="*{displayName}" placeholder="2～10文字で入力">
+						<!--名前用：バリデーションエラー表示-->
+						<span th:if="${#fields.hasErrors('displayName')}"
+						th:errors="*{displayName}" style="color:red">
+							エラーがあれば表示
+						</span>			
+						</td>
+					</tr>								
+				
+					<tr>
+						<th>身長(cm)</th>
+						<td>
+							<input type="text" th:field="*{haight}">
+							<p text>cm</p>
+							<!--体重用：バリデーションエラー表示-->
+						<span th:if="${#fields.hasErrors('hight')}"
+							th:errors="*{hight}" style="color:red">
+						エラーがあれば表示
+					</span>				
+						</td>
+					</tr>
+					<tr>
+						<th>ログイン用:username</th>
+						<td>
+							<input type="text" th:field="*{username}" placeholder="3～10文字で入力">
+							<!--体脂肪用：バリデーションエラー表示-->
+							<span th:if="${#fields.hasErrors('username')}"
+								th:errors="*{username}" style="color:red">
+							エラーがあれば表示
+							</span>			
+						</td>
+					</tr>						
+					<tr>					
+						<th>ログイン用:passworrd</th>
+							<td>
+						<input type="text" th:field="*{password}" placeholder="3～10文字で入力">
+						<!--体脂肪用：バリデーションエラー表示-->
+						<span th:if="${#fields.hasErrors('password')}"
+						　th:errors="*{password}" style="color:red">
+						　エラーがあれば表示
+						</span>			
+							</td>
+					</tr>
+				</table>
+					<!--ボタン：登録　or　編集-->
+					<input th:if="${userForm.isNew}" type="submit" value="登録">			
+				<!--	<input th:unless="${recordWeightForm.isNew}" type="submit" value="更新">
+					-->
+				</form>
+				<a th:href="@{/">戻る</a>	
+						
+	
 </body>
 </html>
