@@ -7,6 +7,11 @@ INSERT INTO user(name,hight)
 VALUES
 (#{name},#{hight})
 </select> 
+<select id = "insertAuth">
+INSERT INTO authentication(username,password,Role,displayName)
+VALUES
+(#{username},#{password},#{authority},#{displayname})
+</select> 
 
 <!-- 最新データのみ取得 -->
 	<select id ="showHight" resultType="com.example.weightGraphApp.entity.User" >

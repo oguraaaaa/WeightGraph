@@ -1,5 +1,6 @@
 package com.example.weightGraphApp.service.impl;
 
+import com.example.weightGraphApp.entity.Authentication;
 import com.example.weightGraphApp.entity.User;
 import com.example.weightGraphApp.service.UserService;
 
@@ -12,9 +13,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public Double showHight(User user) {
+	public void insertAuth(Authentication auth) {
 		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		
 	}
 
 	@Override

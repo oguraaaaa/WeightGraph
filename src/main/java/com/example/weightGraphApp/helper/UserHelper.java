@@ -1,6 +1,7 @@
 package com.example.weightGraphApp.helper;
 
 import com.example.weightGraphApp.entity.Authentication;
+import com.example.weightGraphApp.entity.Role;
 import com.example.weightGraphApp.entity.User;
 import com.example.weightGraphApp.form.UserForm;
 
@@ -32,7 +33,7 @@ public class UserHelper {
 		auth.setUsername(form.getUsername());
 		auth.setPassword(form.getPassword());
 		auth.setDisplayname(form.getDisplayName());
-		auth.setAuthority('user');
+		auth.setAuthority(Role.user);
 		return auth;
 		
 	}

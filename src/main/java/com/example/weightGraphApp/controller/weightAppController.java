@@ -53,6 +53,7 @@ public class weightAppController {
 		User user = UserHelper.convertUser(form);
 		userService.insert(user);
 		Authentication authentication = UserHelper.convertAuth(form);
+		userService.insertAuth(authentication);
 		
 		
 		return "redirect:/weight/goalSet";
