@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserForm {	
+	private Integer id;
 	@NotNull(message ="必須です。入力して下さい")
 	@Size(min=2,max=10,message="2～10文字入力でしてください")
 	private String displayName;
 	@NotNull(message ="必須です。入力して下さい")
-	private double hight;
+	private Double height;
 	@NotNull(message ="必須です。入力して下さい")
 	@Size(min=3,max=10,message="3～10文字で入力してください")
 	private String username;

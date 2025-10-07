@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS weightRecords;
 DROP TABLE IF EXISTS authentications;
 DROP TYPE IF EXISTS role;
+DROP TABLE IF EXISTS "user";
 
 --テーブルの作成
 CREATE TABLE weightRecords(
@@ -37,26 +38,27 @@ CREATE TABLE goal(
 );
 
 --テーブルが存在したら削除する
-DROP TABLE IF EXISTS user;
+
 
 --テーブルの作成
-CREATE TABLE user(
+CREATE TABLE "user"(
 	--id:主キー
 	id serial PRIMARY KEY,
 	--名前
-	name varchar,
+	displayName varchar(50),
+	limitBw DECIMAL,
 	--身長:NUll不可
-	hight DECIMAL
+	height DECIMAL
 	);
 
 --権限用のENUM型
-CREATE TYPE role AS ENUM('ADMIN','user');
+CREATE TYPE role AS ENUM('ADMIN','USER');
 
 
 --認証情報を格納するテーブル
 CREATE TABLE authentications(
 	--ユーザー名：主キー
-	username VARCHAR(50)PRIMARY KEY,
+	username VARCHAR(50) PRIMARY KEY,
 	--パスワード
 	password VARCHAR(255)NOT NULL,
 	--権限
@@ -64,7 +66,7 @@ CREATE TABLE authentications(
 	-- 表示名
 	displayname VARCHAR(50) NOT NULL
 	--外部キー
-	user_id  REFERENCES user(id)
+	
 
 	);	
 

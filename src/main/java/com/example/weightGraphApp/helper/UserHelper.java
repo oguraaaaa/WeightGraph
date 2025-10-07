@@ -9,10 +9,9 @@ public class UserHelper {
 	
 	public static User convertUser(UserForm form) {
 		User user = new User();
-		user.setHight(form.getHight());
+		user.setHeight(form.getHeight());
 		user.setDisplayName(form.getDisplayName());
-		user.setHight(form.getHight());
-		user.setLimitBw(((form.getHight()/100)*(form.getHight()/100))*18.5);
+		user.setLimitBw(((form.getHeight()/100)*(form.getHeight()/100))*18.5);
 		
 		return user;
 		
@@ -21,7 +20,7 @@ public class UserHelper {
 	public static UserForm convertUserForm(User user) {
 		UserForm form = new UserForm();
 		form.setDisplayName(user.getDisplayName());
-		form.setHight(user.getHight());
+		form.setHeight(user.getHeight());
 		
 		//更新画面設定
 		form.setIsNew(false);
@@ -33,7 +32,7 @@ public class UserHelper {
 		auth.setUsername(form.getUsername());
 		auth.setPassword(form.getPassword());
 		auth.setDisplayname(form.getDisplayName());
-		auth.setAuthority(Role.user);
+		auth.setAuthority(Role.USER);
 		return auth;
 		
 	}

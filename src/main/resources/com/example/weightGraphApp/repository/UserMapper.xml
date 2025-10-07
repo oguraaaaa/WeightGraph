@@ -3,9 +3,9 @@
 <mapper namespace="com.example.weightGraphApp.repository.UserMapper">
 
 <select id = "insert">
-INSERT INTO user(name,hight)
+INSERT INTO "user"(displayName,height,limitBw)
 VALUES
-(#{name},#{hight})
+(#{displayName},#{height},#{limitBw})
 </select> 
 <select id = "insertAuth">
 INSERT INTO authentication(username,password,Role,displayName)
@@ -15,7 +15,7 @@ VALUES
 
 <!-- 最新データのみ取得 -->
 	<select id ="showHight" resultType="com.example.weightGraphApp.entity.User" >
-		SELECT hight 
+		SELECT height 
 		FROM user;	
 	</select>
 

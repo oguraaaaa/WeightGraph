@@ -56,7 +56,7 @@ public class LoginUserDatailsServiceImpl implements UserDetailsService{
 		//ADMINロールの場合、USERの権限も付与
 		if(role==Role.ADMIN) {
 			authorities.add(
-					new SimpleGrantedAuthority(Role.user.toString()));
+					new SimpleGrantedAuthority(Role.USER.toString()));
 		}
 		return authorities;
 			

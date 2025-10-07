@@ -52,8 +52,8 @@ public class weightAppController {
 		attributes.addFlashAttribute("message","ユーザー登録しました。続けて目標を設定しましょう！");
 		User user = UserHelper.convertUser(form);
 		userService.insert(user);
-		Authentication authentication = UserHelper.convertAuth(form);
-		userService.insertAuth(authentication);
+		Authentication auth = UserHelper.convertAuth(form);
+		userService.insertAuth(auth);
 		
 		
 		return "redirect:/weight/goalSet";
