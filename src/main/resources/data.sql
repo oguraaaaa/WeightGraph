@@ -28,4 +28,4 @@ VALUES
 
 -- 認証テーブルへのダミーデータの追加
 INSERT INTO authentications (username, password,authority,displayname) VALUES
-('admin', '$2a$10$d7qacSOr08i7KD1zW6jvdelgu1eaA85/uXWqHRdHVRJ5UuS2AkKkG','ADMIN','ゆうか');
+('admin', '$2a$10$d7qacSOr08i7KD1zW6jvdelgu1eaA85/uXWqHRdHVRJ5UuS2AkKkG','USER','ゆうか');

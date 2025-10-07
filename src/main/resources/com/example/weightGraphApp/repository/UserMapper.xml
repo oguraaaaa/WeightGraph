@@ -8,9 +8,9 @@ VALUES
 (#{displayName},#{height},#{limitBw})
 </select> 
 <select id = "insertAuth">
-INSERT INTO authentication(username,password,Role,displayName)
+INSERT INTO authentications(username,password,authority,displayName)
 VALUES
-(#{username},#{password},#{authority},#{displayname})
+(#{username},#{password},#{authority}::role,#{displayname})
 </select> 
 
 <!-- 最新データのみ取得 -->

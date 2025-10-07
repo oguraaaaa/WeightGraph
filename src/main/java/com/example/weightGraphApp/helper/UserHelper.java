@@ -1,5 +1,7 @@
 package com.example.weightGraphApp.helper;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.example.weightGraphApp.entity.Authentication;
 import com.example.weightGraphApp.entity.Role;
 import com.example.weightGraphApp.entity.User;
@@ -28,9 +30,10 @@ public class UserHelper {
 	}
 	
 	public static Authentication convertAuth(UserForm form) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Authentication auth = new Authentication();
 		auth.setUsername(form.getUsername());
-		auth.setPassword(form.getPassword());
+		auth.setPassword(encoder.encode(form.getPassword()));
 		auth.setDisplayname(form.getDisplayName());
 		auth.setAuthority(Role.USER);
 		return auth;
