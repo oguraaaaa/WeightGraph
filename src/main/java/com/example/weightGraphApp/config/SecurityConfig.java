@@ -25,7 +25,7 @@ public class SecurityConfig {
 		//★HTTPリクエストに対するセキュリティ設定
 		.authorizeHttpRequests(authz -> authz
 		//「/login」へのアクセスは認証を必要としない		
-		.requestMatchers("/login","/weight/userForm","/weight/user/save","/weight/goalSet","/images/**").permitAll()
+		.requestMatchers("/login","/weight/**","/images/**").permitAll()
 		// 【管理者権限設定】url:/todos/**は管理者しかアクセスできない
 		.requestMatchers("/weight/main").hasAuthority("USER")
 		
