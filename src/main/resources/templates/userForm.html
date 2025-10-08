@@ -3,19 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <title>ユーザー情報入力画面</title>
+<style>
+	body {
+	     background-color: #fff0f6; /* 薄いピンク背景 */
+	     font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+	     display: flex;
+	     justify-content: center;
+	     padding: 40px 0;
+	   }
+	   form {
+	     background: #ffe6f0;
+	     padding: 30px 40px;
+	     border-radius: 20px;
+	     box-shadow: 0 8px 15px rgba(255, 182, 193, 0.4);
+	     width: 400px;
+	   }
+	   h2 {
+	     color: #d6336c;
+	     text-align: center;
+	     margin-bottom: 30px;
+	     font-weight: bold;
+	     font-size: 28px;
+	   }
+	   table {
+	     width: 100%;
+	     border-collapse: separate;
+	     border-spacing: 0 18px;
+	   }
+	   th {
+	     text-align: left;
+	     font-size: 18px;
+	     padding-bottom: 6px;
+	     color: #a83254;
+	     width: 100px;
+	     vertical-align: middle;
+	   }
+	   td {
+	     width: 120px;
+	   }
+	   input[type="text"], input[type="password"] {
+	     width: 100%;
+	     padding: 12px 18px;
+	     border: 2px solid #d6336c;
+	     border-radius: 15px;
+	     font-size: 18px;
+	     font-weight: 600;
+	     color: #5a1a3f;
+	     box-sizing: border-box;
+	     transition: border-color 0.3s ease;
+	   }
+	   input[type="text"]:focus, input[type="password"]:focus {
+	     outline: none;
+	     border-color: #f72585;
+	     background-color: #fff0f6;
+	   }
+	   input[type="submit"] {
+	     display: block;
+	     width: 100%;
+	     margin-top: 30px;
+	     padding: 15px 0;
+	     background-color: #f72585;
+	     border: none;
+	     border-radius: 25px;
+	     font-size: 20px;
+	     font-weight: 700;
+	     color: white;
+	     cursor: pointer;
+	     box-shadow: 0 6px 12px rgba(247, 37, 133, 0.5);
+	     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	   }
+	   input[type="submit"]:hover {
+	     background-color: #d6336c;
+	     box-shadow: 0 8px 18px rgba(214, 51, 108, 0.7);
+	   }
+	   .error-msg {
+	     display: block;
+	     margin-top: 5px;
+	     color: #e63946;
+	     font-weight: 700;
+	     font-size: 14px;
+	   }
+	   
+	   a {
+	     display: block;
+	     margin-top: 20px;
+	     text-align: center;
+	     color: #a83254;
+	     font-weight: 600;
+	     text-decoration: none;
+	     font-size: 16px;
+	     transition: color 0.3s ease;
+	   }
+	   a:hover {
+	     color: #f72585;
+	   }
+</style>	
 </head>
 <body>
 	
 	<p th:if="${message}" th:text="${message}"
 				style="color:blue;">初回案内メッセージ
 				</p>
+				<br>
 		<!--タイトル：登録 or 編集-->
-			<h2 th:if="${userForm.isNew}">自分の情報を入力</h2>
 			<!--アクション：登録 or 編集-->
 			<form th:action="@{/weight/user/save}"
 				th:object="${userForm}" method="post">
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 			<input type="hidden" th:field="*{id}">
+			<h2 th:if="${userForm.isNew}">自分の情報を入力</h2>
+			<br>
 			<table>
 				<tr>
 					<th>名前</th>
@@ -23,7 +120,7 @@
 						<input type="text" th:field="*{displayName}" placeholder="2～10文字で入力">
 						<!--名前用：バリデーションエラー表示-->
 						<span th:if="${#fields.hasErrors('displayName')}"
-						th:errors="*{displayName}" style="color:red">
+						th:errors="*{displayName}" class="error-msg">
 							エラーがあれば表示
 						</span>			
 						</td>
@@ -32,10 +129,10 @@
 					<tr>
 						<th>身長(cm)</th>
 						<td>
-							<input type="text" th:field="*{height}"><span>cm</span>
+							<input type="text" th:field="*{height}">
 							<!--体重用：バリデーションエラー表示-->
 						<span th:if="${#fields.hasErrors('height')}"
-							th:errors="*{height}" style="color:red">
+							th:errors="*{height}" class="error-msg">
 						エラーがあれば表示
 					</span>				
 						</td>
@@ -46,7 +143,7 @@
 							<input type="text" th:field="*{username}" placeholder="3～10文字で入力">
 							<!--username用：バリデーションエラー表示-->
 							<span th:if="${#fields.hasErrors('username')}"
-								th:errors="*{username}" style="color:red">
+								th:errors="*{username}" class="error-msg">
 							エラーがあれば表示
 							</span>			
 						</td>
@@ -57,18 +154,19 @@
 						<input type="text" th:field="*{password}" placeholder="3～10文字で入力">
 						<!--password用：バリデーションエラー表示-->
 						<span th:if="${#fields.hasErrors('password')}"
-                        th:errors="*{password}" style="color:red">
+                        th:errors="*{password}" class="error-msg">
 						エラーがあれば表示
 						</span>			
 							</td>
 					</tr>
 				</table>
+				<br>
 					<!--ボタン：登録　or　編集-->
 					<input th:if="${userForm.isNew}" type="submit" value="登録">			
 				<!--	<input th:unless="${recordWeightForm.isNew}" type="submit" value="更新">
 					-->
 				</form>
-				<a th:href="@{/}">戻る</a>	
+				<a th:href="@{/login}">戻る</a>	
 						
 	
 </body>

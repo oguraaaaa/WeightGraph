@@ -4,9 +4,33 @@
     <meta charset="UTF-8">
     <title>体重と体脂肪のグラフ</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<style>
+		body {
+		   background-color:	white;
+		   margin: 0;
+		   height: 100vh; /* 画面高さいっぱい */
+		   display: flex;
+		   justify-content: center; /* 横方向中央寄せ */
+		   align-items: center;     /* 縦方向中央寄せ */
+		   font-family: Arial, sans-serif;
+		 }
+
+		 a {
+		   display: block;
+		   margin-top: 20px;
+		   text-align: center;
+		   color: #a83254;
+		   font-weight: 600;
+		   text-decoration: none;
+		   font-size: 16px;
+		   transition: color 0.3s ease;
+		 }
+		 a:hover {
+		   color: #f72585;
+		 }
+	</style>
 </head>
-<body>
-	<h2>体重と体脂肪の推移</h2>
+<body>	
 	   <canvas id="healthChart" width="200" height="100"></canvas>
 
 	   <script>
@@ -102,14 +126,11 @@
 	                           },
 						 ticks: {
 							    font: {
-							          size: 16 // 目盛りフォントサイズ
+							          size: 16 }// 目盛りフォントサイズ
 							                  },
-						  // 自動調整に加えて少し余裕を持たせる
-						 
-						 
-							     suggestedMin: minWeight - 1,
-							     suggestedMax: maxWeight + 1
-							    }               
+						  // 自動調整に加えて少し余裕を持たせる               
+							     min: minWeight *0.95,
+							     max: maxWeight *1.05
 	                       },
 	                       yFat: {
 	                           type: 'linear',
@@ -125,14 +146,13 @@
 							                  font: {
 							                      size: 16 // 目盛りフォントサイズ
 							                  },
-							                  // 自動調整に加えて少し余裕を持たせる
-											  
-											  suggestedMin: (minFat - 0.5),
-							                  suggestedMax: (maxFat + 0.5)
 							              },   
 	                           grid: {
 	                               drawOnChartArea: false
-	                           }
+	                           },
+						 // 自動調整に加えて少し余裕を持たせる											  
+				         min: (minFat * 0.95),
+						 max: (maxFat * 1.05)
 	                       },
 	                       x: {
 	                           title: {
@@ -162,5 +182,7 @@
 	           alert('データ取得中にエラーが発生しました。');
 	       });
 	   </script>
+	   <br>
+	   <a th:href="@{/weight/main}">戻る</a>
 </body>
 </html>

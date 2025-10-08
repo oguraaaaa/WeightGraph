@@ -3,34 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <title>目標設定画面</title>
+<style>
+	body {
+		     background-color: #fff0f6; /* 薄いピンク背景 */
+		     font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+		     display: flex;
+		     justify-content: center;
+		     padding: 40px 0;
+		   }
+		   form {
+		     background: #ffe6f0;
+		     padding: 30px 40px;
+		     border-radius: 20px;
+		     box-shadow: 0 8px 15px rgba(255, 182, 193, 0.4);
+		     width: 400px;
+		   }
+		   h2 {
+		     color: #d6336c;
+		     text-align: center;
+		     margin-bottom: 30px;
+		     font-weight: bold;
+		     font-size: 28px;
+		   }
+		   table {
+		     width: 100%;
+		     border-collapse: separate;
+		     border-spacing: 0 18px;
+		   }
+		   th {
+			vertical-align: top;
+		     text-align: left;
+		     font-size: 18px;
+		     padding-top: 6px; 
+		     color: #a83254;
+		     width: 100px;
+		     
+		   }
+		   td {
+		     width: 120px;
+		   }
+		   input[type="text"], input[type="password"] {
+		     width: 100%;
+		     padding: 12px 18px;
+		     border: 2px solid #d6336c;
+		     border-radius: 15px;
+		     font-size: 18px;
+		     font-weight: 600;
+		     color: #5a1a3f;
+		     box-sizing: border-box;
+		     transition: border-color 0.3s ease;
+		   }
+		   input[type="text"]:focus, input[type="password"]:focus {
+		     outline: none;
+		     border-color: #f72585;
+		     background-color: #fff0f6;
+		   }
+		   input[type="submit"] {
+		     display: block;
+		     width: 100%;
+		     margin-top: 30px;
+		     padding: 15px 0;
+		     background-color: #f72585;
+		     border: none;
+		     border-radius: 25px;
+		     font-size: 20px;
+		     font-weight: 700;
+		     color: white;
+		     cursor: pointer;
+		     box-shadow: 0 6px 12px rgba(247, 37, 133, 0.5);
+		     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+		   }
+		   input[type="submit"]:hover {
+		     background-color: #d6336c;
+		     box-shadow: 0 8px 18px rgba(214, 51, 108, 0.7);
+		   }
+		   
+		   input[type="date"]:focus {
+		     outline: none;
+		     border-color: #f72585;
+		     background-color: #fff0f6;
+		   }
+		   .error-msg {
+		     display: block;
+		     margin-top: 5px;
+		     color: #e63946;
+		     font-weight: 700;
+		     font-size: 14px;
+		   }
+		   
+		   /* コメントのpタグはテキストエリアより幅広に */
+		   td p {
+		     width: 350%;
+		     margin-top: 8px;
+		     margin-left: 0;
+		     color: #5a1a3f;
+		     font-weight: 600;
+		     font-size: 16px;
+		   }
+
+		   
+		   a {
+		     display: block;
+		     margin-top: 20px;
+		     text-align: center;
+		     color: #a83254;
+		     font-weight: 600;
+		     text-decoration: none;
+		     font-size: 16px;
+		     transition: color 0.3s ease;
+		   }
+		   a:hover {
+		     color: #f72585;
+		   }
+		   
+		   textarea {
+		     width: 100%;             /* 幅を他の入力に合わせる */
+		     padding: 12px 18px;      /* 入力フォームと同じパディング */
+		     border: 2px solid #d6336c;
+		     border-radius: 15px;
+		     font-size: 18px;
+		     font-weight: 600;
+		     color: #5a1a3f;
+		     box-sizing: border-box;
+		     resize: vertical;        /* ユーザーが高さ調整可能 */
+		     font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+		     transition: border-color 0.3s ease;
+		   }
+		   
+		   textarea:focus {
+		     outline: none;
+		     border-color: #f72585;
+		     background-color: #fff0f6;
+		   }
+	</style>	
+	
+</style>
 </head>
 <body>
-	<!--タイトル：登録 or 編集-->
-	<h2 th:if="${goalSetForm.isNew}">目標を設定</h2>
-	<h2 th:unless="${goalSetForm.isNew}">目標の編集</h2>
 	<!--アクション：登録 or 編集-->
 		<form th:action="${goalSetForm.isNew}?@{/weight/goal/save}:@{/weight/goal/update}"
 			th:object="${goalSetForm}" method="post">
 		
+	<!--タイトル：登録 or 編集-->
+	<h2 th:if="${goalSetForm.isNew}">★目標を設定する★</h2>
+	<h2 th:unless="${goalSetForm.isNew}">目標の編集</h2>
 		<table>
 			<tr>
-				<th>目標体重</th>
+				<th>目標体重(kg)</th>
 				<td>
 					<input type="text" th:field="*{goalWeight}">
 					<!--体重用：バリデーションエラー表示-->
 				<span th:if="${#fields.hasErrors('goalWeight')}"
-					th:errors="*{goalWeight}" style="color:red">
+					th:errors="*{goalWeight}" class="error-msg">
 					エラーがあれば表示
 				</span>				
 				</td>
 				</tr>
 			<tr>
-				<th>目標体脂肪率</th>
+				<th>目標体脂肪率(％)</th>
 				<td>
 					<input type="text" th:field="*{goalFat}">
 					<!--体脂肪用：バリデーションエラー表示-->
 					<span th:if="${#fields.hasErrors('goalFat')}"
-						th:errors="*{goalFat}" style="color:red">
+						th:errors="*{goalFat}" class="error-msg">
 					エラーがあれば表示
 					</span>			
 				</td>
@@ -38,12 +173,13 @@
 				<tr>					
 			<th>★やりたいこと★</th>
 				<td>
-					<textarea rows="3" cols="30" th:field="*{memo}">						
+					<textarea rows="5" cols="15" th:field="*{memo}">						
 					</textarea>
-				<th>・〇〇のワンピースで同窓会に行く！<br>・プールで可愛い水着を着る！・・等</th>	
+					<br>
+				<p>・〇〇のワンピースで同窓会に行く！<br>・プールで可愛い水着を着る！…等</p>	
 				<!--詳細用：バリデーションエラー表示-->			
 					<span th:if="${#fields.hasErrors('memo')}"
-					th:errors="*{memo}" style="color:red;">
+					th:errors="*{memo}"class="error-msg">
 				エラーがあれば表示
 					</span>				
 				</td>
@@ -54,7 +190,7 @@
 					<input type="date" th:field="*{goalDay}">
 				<!--日付用：バリデーションエラー表示-->
 					<span th:if="${#fields.hasErrors('goalDay')}"
-					th:errors="*{goalDay}" style="color:red">
+					th:errors="*{goalDay}" class="error-msg">
 						エラーがあれば表示
 					</span>			
 				</td>

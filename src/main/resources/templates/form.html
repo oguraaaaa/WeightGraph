@@ -3,6 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <title>記録画面</title>
+<style>
+	body {
+	     background-color: #fff0f6; /* 薄いピンク背景 */
+	     font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+	     display: flex;
+	     justify-content: center;
+	     padding: 40px 0;
+	   }
+	   form {
+	     background: #ffe6f0;
+	     padding: 30px 40px;
+	     border-radius: 20px;
+	     box-shadow: 0 8px 15px rgba(255, 182, 193, 0.4);
+	     width: 400px;
+	   }
+	   h2 {
+	     color: #d6336c;
+	     text-align: center;
+	     margin-bottom: 30px;
+	     font-weight: bold;
+	     font-size: 28px;
+	   }
+	   table {
+	     width: 100%;
+	     border-collapse: separate;
+	     border-spacing: 0 18px;
+	   }
+	   th {
+	     text-align: left;
+	     font-size: 18px;
+	     padding-bottom: 6px;
+	     color: #a83254;
+	     width: 100px;
+	     vertical-align: middle;
+	   }
+	   td {
+	     width: 120px;
+	   }
+	   input[type="text"], input[type="password"] {
+	     width: 100%;
+	     padding: 12px 18px;
+	     border: 2px solid #d6336c;
+	     border-radius: 15px;
+	     font-size: 18px;
+	     font-weight: 600;
+	     color: #5a1a3f;
+	     box-sizing: border-box;
+	     transition: border-color 0.3s ease;
+	   }
+	   input[type="text"]:focus, input[type="password"]:focus {
+	     outline: none;
+	     border-color: #f72585;
+	     background-color: #fff0f6;
+	   }
+	   input[type="submit"] {
+	     display: block;
+	     width: 100%;
+	     margin-top: 30px;
+	     padding: 15px 0;
+	     background-color: #f72585;
+	     border: none;
+	     border-radius: 25px;
+	     font-size: 20px;
+	     font-weight: 700;
+	     color: white;
+	     cursor: pointer;
+	     box-shadow: 0 6px 12px rgba(247, 37, 133, 0.5);
+	     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	   }
+	   input[type="submit"]:hover {
+	     background-color: #d6336c;
+	     box-shadow: 0 8px 18px rgba(214, 51, 108, 0.7);
+	   }
+	   .error-msg {
+	     display: block;
+	     margin-top: 5px;
+	     color: #e63946;
+	     font-weight: 700;
+	     font-size: 14px;
+	   }
+	   
+	   a {
+	     display: block;
+	     margin-top: 20px;
+	     text-align: center;
+	     color: #a83254;
+	     font-weight: 600;
+	     text-decoration: none;
+	     font-size: 16px;
+	     transition: color 0.3s ease;
+	   }
+	   a:hover {
+	     color: #f72585;
+	   }
+</style>	
 </head>
 <body>
 		<p th:if="${message}" th:text="${message}"
@@ -22,7 +117,7 @@
 					<input type="date" th:field="*{recordDay}">
 					<!--日付用：バリデーションエラー表示-->
 					<span th:if="${#fields.hasErrors('recordDay')}"
-					th:errors="*{recordDay}" style="color:red">
+					th:errors="*{recordDay}" class="error-msg">
 						エラーがあれば表示
 					</span>			
 					</td>
@@ -34,7 +129,7 @@
 						<input type="text" th:field="*{weight}">
 						<!--体重用：バリデーションエラー表示-->
 					<span th:if="${#fields.hasErrors('weight')}"
-						th:errors="*{weight}" style="color:red">
+						th:errors="*{weight}" class="error-msg">
 					エラーがあれば表示
 				</span>				
 					</td>
@@ -45,7 +140,7 @@
 						<input type="text" th:field="*{fat}">
 						<!--体脂肪用：バリデーションエラー表示-->
 						<span th:if="${#fields.hasErrors('fat')}"
-							th:errors="*{fat}" style="color:red">
+							th:errors="*{fat}" class="error-msg">
 						エラーがあれば表示
 						</span>			
 					</td>
@@ -57,7 +152,7 @@
 					</textarea>
 					<!--詳細用：バリデーションエラー表示-->
 						<span th:if="${#fields.hasErrors('memo')}"
-					th:errors="*{memo}" style="color:red;">
+					th:errors="*{memo}" class="error-msg">
 					エラーがあれば表示
 					</span>				
 				</td>
