@@ -10,6 +10,7 @@ public class WeightHelper {
 		record.setWeight(form.getWeight());
 		record.setFat(form.getFat());
 		record.setMemo(form.getMemo());
+		record.setRecordDay(form.getRecordDay());
 		return record;
 	}
 	
@@ -19,6 +20,7 @@ public class WeightHelper {
 		form.setWeight(record.getWeight());
 		form.setFat(record.getFat());
 		form.setMemo(record.getMemo());
+		form.setRecordDay(record.getRecordDay());
 		//更新画面設定
 		form.setIsNew(false);
 		return form;

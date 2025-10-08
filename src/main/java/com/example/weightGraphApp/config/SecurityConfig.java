@@ -24,11 +24,11 @@ public class SecurityConfig {
 		http
 		//★HTTPリクエストに対するセキュリティ設定
 		.authorizeHttpRequests(authz -> authz
+				// 【管理者権限設定】url:/todos/**は管理者しかアクセスできない
+				.requestMatchers("/weight/main").hasAuthority("USER")
+				
 		//「/login」へのアクセスは認証を必要としない		
-		.requestMatchers("/login","/weight/**","/images/**").permitAll()
-		// 【管理者権限設定】url:/todos/**は管理者しかアクセスできない
-		.requestMatchers("/weight/main").hasAuthority("USER")
-		
+		.requestMatchers("/login","/","/weight/**","/images/**").permitAll()
 		//その他のリクエストは認証が必要
 		.anyRequest().authenticated())
 		//★フォームベースのログイン設定
@@ -42,7 +42,7 @@ public class SecurityConfig {
 		//パスワードのname属性を指定
 		.passwordParameter("passwordInput")
 		//ログイン成功のリダイレクト先を指定
-		.defaultSuccessUrl("/weight/goalSet")
+		.defaultSuccessUrl("/weight/main")
 		//ログイン失敗時のリダイレクト先を指定
 		.failureUrl("/login?error"))
 		//★ログアウト設定

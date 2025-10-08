@@ -43,13 +43,18 @@
 <body>
 		
 		<div class = "container">
+			<p th:if="${loginmessage}" th:text="${loginmessage}"
+			style="color:blue;">ログイン進行</p>
 			
+		<img src="/images/ouen_jersey_woman5_yellow.png" alt="応援画像">
+			<div th:unless = "${loginmessage}">
+		<br>
 		<a th:href="@{/weight/userForm}">目標を設定してダイエットを始める！</a>
 			
 		<br>
-		<img src="/images/ouen_jersey_woman5_yellow.png" alt="応援画像">
 		<p text>↓登録済みの方はこちらから↓</p>
-		<br>
+	
+		</div>
 		<div th:if="${param.error}">
 				<p style="color:red;">usernameまたはpasswordが違います</p>
 				</div>

@@ -16,6 +16,7 @@ import com.example.weightGraphApp.entity.Goal;
 import com.example.weightGraphApp.entity.User;
 import com.example.weightGraphApp.entity.WeightRecord;
 import com.example.weightGraphApp.form.GoalSetForm;
+import com.example.weightGraphApp.form.LoginForm;
 import com.example.weightGraphApp.form.RecordWeightForm;
 import com.example.weightGraphApp.form.UserForm;
 import com.example.weightGraphApp.helper.GoalHelper;
@@ -36,6 +37,12 @@ public class weightAppController {
 	private final GoalService goalService;
 	private final UserService userService;
 	
+	@GetMapping
+	public String gate() {
+		return "/login";
+	}
+	
+	
 	@GetMapping("/userForm")
 	public String userForm(@ModelAttribute UserForm form){
 		form.setIsNew(true);
@@ -54,6 +61,7 @@ public class weightAppController {
 		userService.insert(user);
 		Authentication auth = UserHelper.convertAuth(form);
 		userService.insertAuth(auth);
+	
 		
 		
 		return "redirect:/weight/goalSet";
@@ -89,17 +97,23 @@ public class weightAppController {
 	}
 	
 	@PostMapping("/goal/save")
-	public String goalSave(@Validated GoalSetForm form,BindingResult bindingResult,RedirectAttributes attributes) {
+	public String goalSave(@Validated GoalSetForm form,BindingResult bindingResult,@ModelAttribute LoginForm logform,RedirectAttributes attributes) {
 		if(bindingResult.hasErrors()) {
 			form.setIsNew(true);
 			return "goalSetForm";
 		}
 		
-		attributes.addFlashAttribute("message","目標を設定しました。続けて体重を記録しましょう！");
+		attributes.addFlashAttribute("loginmessage","目標を設定しました。ログインして体重を記録しましょう！");
 		Goal goal = GoalHelper.convertGoal(form);
 		goalService.insert(goal);
-		return "redirect:/weight/form";
+		return "redirect:/login";
 	}
+	
+//	@GetMapping("/autologin")
+//	public String autologin(@ModelAttribute LoginForm form,RedirectAttributes attributes) {
+//		attributes.addFlashAttribute("loginmessage","目標を設定しました。ログインして体重を記録しましょう！");
+//		return "autologin";
+//	}
 	
 	@PostMapping("/save")
 	public String insert(@Validated RecordWeightForm form,BindingResult bindingResult,RedirectAttributes attributes) {

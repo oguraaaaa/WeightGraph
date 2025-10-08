@@ -67,9 +67,9 @@
 				<input th:if="${recordWeightForm.isNew}" type="submit" value="登録">			
 				<input th:unless="${recordWeightForm.isNew}" type="submit" value="更新">
 			</form>
-			<a th:href="@{/weight/goalSet}">戻る</a>
-			<a th:href="@{/weight/noset}">記録せずに進む</a>		
-		
+			<a th:href="@{/weight/main}">戻る</a>
+			<!--<a th:href="@{/weight/noset}">記録せずに進む</a>		
+		-->
 		
 </body>
 </html>
