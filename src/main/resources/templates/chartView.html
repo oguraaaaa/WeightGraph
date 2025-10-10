@@ -13,6 +13,7 @@
 		   justify-content: center; /* 横方向中央寄せ */
 		   align-items: center;     /* 縦方向中央寄せ */
 		   font-family: Arial, sans-serif;
+		   flex-direction: column;
 		 }
 
 		 a {
@@ -28,9 +29,16 @@
 		 a:hover {
 		   color: #f72585;
 		 }
+		 .form-wrapper {
+		   display: flex;
+		   flex-direction: column;
+		   align-items: center;
+		 			 	   
+		 		   }
 	</style>
 </head>
 <body>	
+	
 	   <canvas id="healthChart" width="200" height="100"></canvas>
 
 	   <script>
@@ -100,10 +108,32 @@
 	           }
 
 	           const ctx = document.getElementById('healthChart').getContext('2d');
-			   const minWeight = Math.min(...weights);
+			   
+			   
+			   const minWeightData = Math.min(...weights);
 			   const maxWeight = Math.max(...weights);
-			   const minFat = Math.min(...fats);
+
+			   let minWeight = minWeightData;
+
+			   // ゴールがあればゴールの値＊0.95と比較して小さい方を使う
+			   if (goal && goal.goalWeight != null) {
+			       minWeight = Math.min(minWeight, goal.goalWeight);
+			   }
+			   
+			   
 			   const maxFat = Math.max(...fats);
+			   const minFatData = Math.min(...fats);
+			   
+
+			   let minFat = minFatData;
+
+			   // ゴールがあればゴールの値＊0.95と比較して小さい方を使う
+			   if (goal && goal.goalFat != null) {
+			       minFat = Math.min(minFat, goal.goalFat);
+			   }
+			   
+			   
+			   
 			   
 	           new Chart(ctx, {
 	               type: 'line',
@@ -154,22 +184,24 @@
 				         min: (minFat * 0.95),
 						 max: (maxFat * 1.05)
 	                       },
-	                       x: {
-	                           title: {
-	                               display: true,
-	                               text: '日付',
-								   font: {
-								              size: 20
-								                      }
-	                           }
-	                       }
+						  
+	          //     x: {
+	           //         title: {
+	            //          display: true,
+	             //         text: '日付',
+				//		  font: {
+					//		size: 20
+					//			 }
+	               //            }
+	               //     }
+						
 	                   },
 	                   plugins: {
 	                       legend: {
 	                           position: 'top',
 							   labels: {
-							                  font: {
-							                      size: 16 // 凡例（ライン名）のフォントサイズ
+							       font: {
+							        size: 16 // 凡例（ライン名）のフォントサイズ
 							                  }
 							              }
 	                       }
@@ -184,5 +216,6 @@
 	   </script>
 	   <br>
 	   <a th:href="@{/weight/main}">戻る</a>
+	
 </body>
 </html>

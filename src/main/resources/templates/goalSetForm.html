@@ -42,7 +42,7 @@
 		   td {
 		     width: 120px;
 		   }
-		   input[type="text"], input[type="password"] {
+		   input[type="text"]{
 		     width: 100%;
 		     padding: 12px 18px;
 		     border: 2px solid #d6336c;
@@ -53,7 +53,7 @@
 		     box-sizing: border-box;
 		     transition: border-color 0.3s ease;
 		   }
-		   input[type="text"]:focus, input[type="password"]:focus {
+		   input[type="text"]:focus {
 		     outline: none;
 		     border-color: #f72585;
 		     background-color: #fff0f6;
@@ -134,12 +134,22 @@
 		     outline: none;
 		     border-color: #f72585;
 		     background-color: #fff0f6;
+			 }
+		   .form-wrapper {
+			 display: flex;
+			 flex-direction: column;
+			 align-items: center;			 	   
 		   }
 	</style>	
 	
 </style>
 </head>
 <body>
+	<div class="form-wrapper">
+	<p th:if="${message}" th:text="${message}"
+				style="color:orangered;">初回案内メッセージ
+				</p>
+	
 	<!--アクション：登録 or 編集-->
 		<form th:action="${goalSetForm.isNew}?@{/weight/goal/save}:@{/weight/goal/update}"
 			th:object="${goalSetForm}" method="post">
@@ -202,8 +212,9 @@
 					<input th:if="${goalSetForm.isNew}" type="submit" value="登録！">			
 					<input th:unless="${goalSetForm.isNew}" type="submit" value="更新～★">
 				</form>
-	<!--			<a th:href="@{/weight}">戻る</a>		
-				<a th:href="@{/weight/main}">記録を見る</a>		
+		<!--	<a th:href="@{/userForm}">戻る</a>		
 			-->
+				<a th:href="@{/weight/noset}">スキップして進む</a>
+	</div>		
 </body>
 </html>

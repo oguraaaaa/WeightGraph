@@ -69,15 +69,31 @@ public class weightAppController {
 	
 	
 	@GetMapping("/noset")
-	public String nosetStart() {
-		return "main";
+	public String nosetStart(RedirectAttributes attributes) {
+		attributes.addFlashAttribute("loginmessage","ログインして体重を記録しましょう！");
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/main")
 	public String maintPage(Model model) {
-		model.addAttribute("WeightRecords",weightGraph.showAll());	
-		model.addAttribute("leatest",weightGraph.leatest());
-		model.addAttribute("goal",goalService.leatest());
+		
+		 var allRecords = weightGraph.showAll();
+		    var latestRecord = weightGraph.leatest();
+		    var goal = goalService.leatest();
+
+		    if (allRecords != null && !allRecords.isEmpty()) {
+		        model.addAttribute("WeightRecords", allRecords);
+		    }
+		    if (latestRecord != null) {
+		        model.addAttribute("leatest", latestRecord);
+		    }
+		    if (goal != null) {
+		        model.addAttribute("goal", goal);
+		    }
+//
+//		model.addAttribute("WeightRecords",weightGraph.showAll());	
+//		model.addAttribute("leatest",weightGraph.leatest());
+//		model.addAttribute("goal",goalService.leatest());
 		return "main";
 	}
 	

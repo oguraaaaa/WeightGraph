@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <title>メイン画面</title>
+<style>
+	body {
+	   background-color:	#fff0f6;	  
+	   font-family: Arial, sans-serif;
+	   font-family: 'Comic Neue', 'Poppins', Arial, sans-serif;
+	     color: #d6336c; /* 柔らかいパープル系 */
+	  
+	     letter-spacing: 0.05em; /* 少し字間を開けて読みやすく */
+	 }
+	 a {
+	     font-size: 0.8rem;      /* 文字サイズ大きく */
+	     color: white;           /* 見やすいオレンジに */
+	     text-decoration: none;  /* 下線を消す */
+	     font-weight: bold;
+	     padding: 2px 5px;
+		 background-color: rgb(255, 128, 192);
+	     border: 0.5px solid rgb(128, 0, 64);
+	     border-radius: 10px;
+	     transition: background-color 0.3s, color 0.3s;
+	 	display: inline-block;
+	   }
+	   
+	   a:hover {
+	       background-color: white;
+	       color: #f72585;
+	     }
+		 
+		 button, input, select {
+		   border-radius: 12px;
+		   border: 1.5px solid #f5a9b8;
+		   padding: 8px 15px;
+		   font-family: 'Poppins', sans-serif;
+		   box-shadow: 2px 2px 5px rgba(245, 169, 184, 0.4);
+		   transition: background-color 0.3s ease;
+		 }
+
+	
+</style>
 </head>
 <body>
+	<h2>記録</h2>
+	<p th:if="${message}" th:text="${message}"
+		style="color:blue;">完了メッセージ
+		</p>
 	<a th:href="@{/weight/form}">今日の体重を記録する</a>
 	
-	<div th:if="${goal.goalWeight != null and leatest != null and leatest.weight != null}"
+	<div th:if="${goal != null and goal.goalWeight != null and leatest != null and leatest.weight != null}"
 	     th:text="'目標体重(' + ${goal.goalWeight} + ' kg)まであと' + (${leatest.weight} - ${goal.goalWeight}) + 'kg!!'"
 	     style="color:orangered">
 	</div>
@@ -18,10 +61,6 @@
 		style = "color:blue"></div>
 	-->
 	
-	<h2>★記録★</h2>
-	<p th:if="${message}" th:text="${message}"
-		style="color:blue;">完了メッセージ
-		</p>
 		
 		<a th:href="@{/weight/chart}">グラフで見る</a>
 	<table border ="1" width="500">
@@ -50,6 +89,8 @@
 				</tr>
 				</tbody>
 		</table>
-		
+		<a href="@{/}">ゴールを設定しなおす</a>
+		<a href="@{/logout}">ログアウト</a>
+		<a href="@{/}">ユーザーデータ削除</a>
 </body>
 </html>
