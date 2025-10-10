@@ -5,7 +5,79 @@
 <meta charset="UTF-8">
 <title>メイン画面</title>
 <style>
-	body {
+	.main-wrapper {
+	  width: 80%;
+	  margin: 0 auto;
+	  text-align: left;
+	}
+	
+	table {
+	  width: 80%;
+	  border-collapse: separate;
+	  border-spacing: 0;
+	  margin: 8px auto;
+	  background-color: #fff; /* 白ベースで清潔感 */
+	  border-radius: 12px;
+	  box-shadow: 0 4px 8px rgba(255, 192, 203, 0.4); /* ほんのりピンク影 */
+	  overflow: hidden;
+	  font-size: 16px;
+	}
+
+	th, td {
+	  padding: 2px 5px;
+	  text-align: center;
+	  border-bottom: 1px solid #f5a9b8;
+	}
+
+	th {
+	  background-color: #fcd5ce; /* 淡いピンク */
+	  color: #d6336c;
+	  font-weight: 300;
+	  font-family: 'Comic Neue', 'Poppins', sans-serif;
+	}
+
+	td {
+	  background-color: #fff0f6;
+	}
+
+	tr:hover td {
+	  background-color: #ffe2f0; /* ホバー時の色 */
+	  transition: background-color 0.3s ease;
+	}
+
+	input[type="submit"] {
+	  background-color: #ffb3c1;
+	  border: none;
+	  padding: 6px 10px;
+	  border-radius: 8px;
+	  color: white;
+	  font-weight: bold;
+	  cursor: pointer;
+	}
+
+	input[type="submit"]:hover {
+	  background-color: #f78da7;
+	}
+
+	a ,form {
+	  font-size: 1rem;
+	  padding: 4px 8px;
+	  background-color: #ffd6e0;
+	  border-radius: 8px;
+	  color: #c9184a;
+	  text-decoration: none;
+	  margin: 4px;
+	  display: inline-block;
+	  transition: 0.3s;
+	}
+
+	a:hover , form:hover {
+	  background-color: #ffaccd;
+	  color: white;
+	}
+	
+	
+	body {		
 	   background-color:	#fff0f6;	  
 	   font-family: Arial, sans-serif;
 	   font-family: 'Comic Neue', 'Poppins', Arial, sans-serif;
@@ -13,10 +85,11 @@
 	  
 	     letter-spacing: 0.05em; /* 少し字間を開けて読みやすく */
 	 }
+	 /*
 	 a {
-	     font-size: 0.8rem;      /* 文字サイズ大きく */
-	     color: white;           /* 見やすいオレンジに */
-	     text-decoration: none;  /* 下線を消す */
+	     font-size: 1.0rem;      /* 文字サイズ大きく 
+	     color: white;           /* 見やすいオレンジに 
+	     text-decoration: none;  /* 下線を消す 
 	     font-weight: bold;
 	     padding: 2px 5px;
 		 background-color: rgb(255, 128, 192);
@@ -30,8 +103,9 @@
 	       background-color: white;
 	       color: #f72585;
 	     }
+		 */
 		 
-		 button, input, select {
+		 button{
 		   border-radius: 12px;
 		   border: 1.5px solid #f5a9b8;
 		   padding: 8px 15px;
@@ -39,11 +113,16 @@
 		   box-shadow: 2px 2px 5px rgba(245, 169, 184, 0.4);
 		   transition: background-color 0.3s ease;
 		 }
+		 h1, h2, h3, p {
+		   text-shadow: 1px 1px 2px rgba(255, 192, 203, 0.4); /* ほんのりピンクの影 */
+		   border-radius: 5px;
+		 }
 
 	
 </style>
 </head>
 <body>
+	<div class="main-wrapper">
 	<h2>記録</h2>
 	<p th:if="${message}" th:text="${message}"
 		style="color:blue;">完了メッセージ
@@ -63,6 +142,7 @@
 	
 		
 		<a th:href="@{/weight/chart}">グラフで見る</a>
+	</div>
 	<table border ="1" width="500">
 			<thead>
 				<tr>
@@ -89,8 +169,13 @@
 				</tr>
 				</tbody>
 		</table>
+		<div class="main-wrapper">
 		<a href="@{/}">ゴールを設定しなおす</a>
-		<a href="@{/logout}">ログアウト</a>
+		<form th:action="@{/logout}" method="post">
+				<input type="submit" value="ログアウト">
+			</form>
+		
 		<a href="@{/}">ユーザーデータ削除</a>
+	</div>
 </body>
 </html>

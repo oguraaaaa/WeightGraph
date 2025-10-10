@@ -158,7 +158,7 @@ public class weightAppController {
 		@GetMapping("/edit/{id}")
 		public String edit(@PathVariable Integer id,Model model,
 				RedirectAttributes attributes) {
-			//すること取得
+			//取得
 			WeightRecord target = weightGraph.show(id);
 			if(target != null) {
 				//対象データがある場合はFormへの変換

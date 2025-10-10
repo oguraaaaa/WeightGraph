@@ -5,6 +5,13 @@
     <title>体重と体脂肪のグラフ</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<style>
+		canvas {
+		  width: 90vw;
+		  max-width: 1200px;
+		  height: 50vw;
+		  margin-top: 30px;
+		}
+		
 		body {
 		   background-color:	white;
 		   margin: 0;
@@ -39,7 +46,7 @@
 </head>
 <body>	
 	
-	   <canvas id="healthChart" width="200" height="100"></canvas>
+	   <canvas id="healthChart"></canvas>
 
 	   <script>
 	       Promise.all([
@@ -142,6 +149,8 @@
 	                   datasets: datasets
 	               },
 	               options: {
+					responsive: true,
+					 maintainAspectRatio: false,
 	                   responsive: true,
 	                   scales: {
 	                       yWeight: {
@@ -185,14 +194,14 @@
 						 max: (maxFat * 1.05)
 	                       },
 						  
-	          //     x: {
+	                x: {
 	           //         title: {
 	            //          display: true,
 	             //         text: '日付',
-				//		  font: {
-					//		size: 20
-					//			 }
-	               //            }
+						  font: {
+							size: 16
+								 }
+	                           }
 	               //     }
 						
 	                   },
@@ -214,7 +223,6 @@
 	           alert('データ取得中にエラーが発生しました。');
 	       });
 	   </script>
-	   <br>
 	   <a th:href="@{/weight/main}">戻る</a>
 	
 </body>
