@@ -125,14 +125,14 @@
 	<div class="main-wrapper">
 	<h2>記録</h2>
 	<p th:if="${message}" th:text="${message}"
-		style="color:blue;">完了メッセージ
+		style="color:orangered;">完了メッセージ
 		</p>
-	<a th:href="@{/weight/form}">今日の体重を記録する</a>
-	
 	<div th:if="${goal != null and goal.goalWeight != null and leatest != null and leatest.weight != null}"
 	     th:text="'目標体重(' + ${goal.goalWeight} + ' kg)まであと' + (${leatest.weight} - ${goal.goalWeight}) + 'kg!!'"
 	     style="color:orangered">
 	</div>
+	<a th:href="@{/weight/form}">今日の体重を記録する</a>
+	
 	<!--
 	<div th:if="@{goal.goalWeight} and @{leatest.weight}"th:text="'目標体重(' + ${goal.goalWeight} + ' kg)まであと' + (${leatest.weight} - ${goal.goalWeight}) + 'kg!!'"
 	style = "color:orangered"></div>
@@ -150,27 +150,25 @@
 					<th>体重</th>
 					<th>体脂肪率</th>
 					<th>メモ</th>
-					<th>削除</th>
 					<th>編集</th>
+					<th>削除</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="data:${WeightRecords}">
-					<td th:text="${data.recordDay.format(
-									T(java.time.format.DateTimeFormatter).
-									ofPattern('yyyy/MM/dd'))}"></td>
+					<td th:text="${data.recordDay.format(T(java.time.format.DateTimeFormatter).ofPattern('yyyy/MM/dd'))}"></td>
 					<td th:text="${data.weight} + ' kg'"></td>
-					<td th:text="${data.fat} + ' ％'"></td>
+					<td th:text="${data.fat != null ? data.fat + ' ％' : ''}"></td>
 					<td th:text="${data.memo}"></td>
+					<td><a th:href="@{/weight/edit/{id}(id=${data.id})}">編集</a></td>
 					<td><form th:action="@{/weight/delete/{id}(id=${data.id})}" method="post">
 						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 						<input type ="submit" value="削除"/></form></td>
-					<td><a th:href="@{/weight/edit/{id}(id=${data.id})}">編集</a></td>
 				</tr>
 				</tbody>
 		</table>
 		<div class="main-wrapper">
-		<a href="@{/}">ゴールを設定しなおす</a>
+		<a th:href="@{/weight/goal/edit}">ゴールを編集</a>
 		<form th:action="@{/logout}" method="post">
 				<input type="submit" value="ログアウト">
 			</form>

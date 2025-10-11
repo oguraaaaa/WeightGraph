@@ -91,7 +91,7 @@ public class weightAppController {
 		        model.addAttribute("goal", goal);
 		    }
 //
-//		model.addAttribute("WeightRecords",weightGraph.showAll());	
+//		model.addAttribute("WeightRecords",weightGraph.showAll());
 //		model.addAttribute("leatest",weightGraph.leatest());
 //		model.addAttribute("goal",goalService.leatest());
 		return "main";
@@ -123,6 +123,42 @@ public class weightAppController {
 		Goal goal = GoalHelper.convertGoal(form);
 		goalService.insert(goal);
 		return "redirect:/login";
+	}
+	
+	@GetMapping("/goal/edit")
+	public String goalEdit(@ModelAttribute GoalSetForm form, Model model) {
+		Goal target = goalService.leatest();
+		if(target != null) {
+			//対象データがある場合はFormへの変換
+			GoalSetForm gform = GoalHelper.convertGoalSetForm(target);
+			//モデルに格納
+			model.addAttribute("goalSetForm",gform);
+			return "goalSetForm";
+		}else {
+		model.addAttribute("message"," ");
+		return "goalSetForm";
+		}
+	}
+	
+	@PostMapping("/goal/update")
+	public String goalpdate(@Validated GoalSetForm form,
+			BindingResult bindingResult,
+			RedirectAttributes attributes) {
+		//===バリデーションチェック===
+		//入力チェックNG:入力画面を表示する
+		if(bindingResult.hasErrors()) {
+			//更新画面の設定
+			form.setIsNew(false);
+			return "form";
+		}
+		//エンティティへの変換
+		Goal goal = GoalHelper.convertGoal(form);
+		//更新処理
+		goalService.insert(goal);
+		//フラッシュメッセージ
+		attributes.addFlashAttribute("message","目標設定完了！");
+		//PRGパターン
+		return "redirect:/weight/main";
 	}
 	
 //	@GetMapping("/autologin")
@@ -178,11 +214,11 @@ public class weightAppController {
 //	public String getTime(Model model) {
 //		LocalDateTime now = LocalDateTime.now();
 //		LocalDate start = Goal.getStartDay();
-//		
+//
 //	    model.addAttribute("pass",LocalDateTime.now() - Goal.getStartDay()));
 //	    return "pass";
 //	}
-//		
+//
 	//情報更新
 	@PostMapping("/update")
 	public String update(@Validated RecordWeightForm form,
@@ -207,7 +243,7 @@ public class weightAppController {
 	
 	 @GetMapping("/chart")
 	    public String showChartPage() {
-	        return "chartView"; // chart.html
-	    }
+	        return "chartView";
 	
+}
 }

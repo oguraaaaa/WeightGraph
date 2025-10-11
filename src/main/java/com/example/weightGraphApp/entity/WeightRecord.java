@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class WeightRecord {
 	private Integer id;
-	private double weight;
-	private double fat;
+	private Double weight;
+	private Double fat;
 	private String memo;
 	private LocalDate recordDay;
 	private Boolean isNew;

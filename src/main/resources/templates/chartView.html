@@ -56,6 +56,7 @@
 
 	           if (!records.length) {
 	               alert('記録データがありません');
+				   location.href = '/weight/main';
 	               return;
 	           }
 			   
@@ -129,7 +130,9 @@
 			   
 			   
 			   const maxFat = Math.max(...fats);
-			   const minFatData = Math.min(...fats);
+			   const minFatData = Math.min(...fats.filter(w => w != null));
+
+;
 			   
 
 			   let minFat = minFatData;
@@ -199,7 +202,7 @@
 	            //          display: true,
 	             //         text: '日付',
 						  font: {
-							size: 16
+							size: 20
 								 }
 	                           }
 	               //     }

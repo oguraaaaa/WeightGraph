@@ -40,7 +40,7 @@
 		     
 		   }
 		   td {
-		     width: 120px;
+		     width: 150px;
 		   }
 		   input[type="text"]{
 		     width: 100%;
@@ -214,7 +214,10 @@
 				</form>
 		<!--	<a th:href="@{/userForm}">戻る</a>		
 			-->
-				<a th:href="@{/weight/noset}">スキップして進む</a>
-	</div>		
+				<div th:if="${goalSetForm.isNew}"><a th:href="@{/weight/noset}">スキップして進む</a></div>
+	   			<div th:unless="${goalSetForm.isNew}"><a th:href="@{/weight/main}">戻る</a></div>
+				
+				
+</div>
 </body>
 </html>
