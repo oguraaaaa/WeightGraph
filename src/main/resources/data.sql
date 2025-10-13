@@ -1,4 +1,3 @@
-/**
 
 --1件目のデータ登録
 INSERT INTO weightRecords(recordDay,weight,fat,memo)
@@ -24,6 +23,7 @@ INSERT INTO weightRecords(recordDay,weight,fat,memo)
 VALUES
 (CURRENT_TIMESTAMP,49.3,24.5,'筋トレした');
 
+/**
 */
 
 -- 認証テーブルへのダミーデータの追加

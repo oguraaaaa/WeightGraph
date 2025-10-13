@@ -134,7 +134,7 @@
 				</div>
 				<!--ログアウト表示-->
 				<div th:if="${param.logout}">
-					<p style="color:blue">ログアウトしました</p>
+					<p style="color:orangered">ログアウトしました</p>
 				</div>
 				<form th:action="@{/authentication}" method ="post" th:object="${loginForm}">
 					<div><!--ユーザー名-->
@@ -150,11 +150,6 @@
 			</div>
 				</form>	
 		
-	<!--	<a th:href="@{/weight/form}">今日の体重を記録する</a>
-		<br>
-		<br>
-		<a th:href="@{/weight/main}">記録を見る</a>
-	-->
 		</div>
 </body>
 </html>

@@ -13,11 +13,12 @@ public interface WeightGraphService {
 		//idで1件取得
 		WeightRecord show(Integer id);
 		//最新表示
-		WeightRecord leatest();				
+		WeightRecord leatest();
 		//体重登録
 		void insert(WeightRecord weightrecord);
 		//更新
 		void update(WeightRecord weightrecord);
 		//削除
 		void delete(@Param("id")Integer id);
+		void deleteAll();
 }

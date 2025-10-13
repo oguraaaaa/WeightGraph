@@ -45,14 +45,15 @@
 	  transition: background-color 0.3s ease;
 	}
 
-	input[type="submit"] {
+	input[type="submit"],button[type="submit"] {
+	  font-size: 1rem;
 	  background-color: #ffb3c1;
 	  border: none;
-	  padding: 6px 10px;
+	  padding: 4px 8px;
 	  border-radius: 8px;
 	  color: white;
-	  font-weight: bold;
-	  cursor: pointer;
+	 
+ 
 	}
 
 	input[type="submit"]:hover {
@@ -85,26 +86,7 @@
 	  
 	     letter-spacing: 0.05em; /* 少し字間を開けて読みやすく */
 	 }
-	 /*
-	 a {
-	     font-size: 1.0rem;      /* 文字サイズ大きく 
-	     color: white;           /* 見やすいオレンジに 
-	     text-decoration: none;  /* 下線を消す 
-	     font-weight: bold;
-	     padding: 2px 5px;
-		 background-color: rgb(255, 128, 192);
-	     border: 0.5px solid rgb(128, 0, 64);
-	     border-radius: 10px;
-	     transition: background-color 0.3s, color 0.3s;
-	 	display: inline-block;
-	   }
-	   
-	   a:hover {
-	       background-color: white;
-	       color: #f72585;
-	     }
-		 */
-		 
+	
 		 button{
 		   border-radius: 12px;
 		   border: 1.5px solid #f5a9b8;
@@ -128,7 +110,7 @@
 		style="color:orangered;">完了メッセージ
 		</p>
 	<div th:if="${goal != null and goal.goalWeight != null and leatest != null and leatest.weight != null}"
-	     th:text="'目標体重(' + ${goal.goalWeight} + ' kg)まであと' + (${leatest.weight} - ${goal.goalWeight}) + 'kg!!'"
+	     th:text="'目標体重(' + ${goal.goalWeight} + ' kg)まであと' + ${#numbers.formatDecimal(bwdistance, 1, 1)} + 'kg!!'"
 	     style="color:orangered">
 	</div>
 	<a th:href="@{/weight/form}">今日の体重を記録する</a>
@@ -168,12 +150,44 @@
 				</tbody>
 		</table>
 		<div class="main-wrapper">
-		<a th:href="@{/weight/goal/edit}">ゴールを編集</a>
-		<form th:action="@{/logout}" method="post">
-				<input type="submit" value="ログアウト">
+		<a th:href="@{/goal/edit}">ゴールを編集</a>
+		<form id = "logout" th:action="@{/logout}" method="post">
+				<button type="submit">ログアウト</button>
 			</form>
 		
-		<a href="@{/}">ユーザーデータ削除</a>
+		<form id = "deleteAll" th:action="@{/weight/deleteAll}" method="post">			
+		<button type="submit">全記録を削除</button></form>
+		
+		<script>
+			//リンクがあるアンカーの取得
+			       const deleteform = document.getElementById('deleteAll');
+			       //リンクがクリックされたときの処理
+			       deleteform.addEventListener('submit', (event) => {
+			           //確認ダイアログの表示
+			           const isOk = confirm('削除したデータは戻せません。\n本当に削除しますか？');
+
+			           //[キャンセル]が押されたか
+			           if(!isOk){
+			               //デフォルトの動作（リンクの遷移）を停止
+			               event.preventDefault();
+			           }
+			       });
+				   
+				   //リンクがあるアンカーの取得
+				   	 const logoutform = document.getElementById('logout');
+				   	 //リンクがクリックされたときの処理
+				   	logoutform.addEventListener('submit', (event) => {
+				   	 //確認ダイアログの表示
+				   	 const isOk = confirm('ログアウトしますか？');
+
+				   	 //[キャンセル]が押されたか
+				   	if(!isOk){
+				   	 //デフォルトの動作（リンクの遷移）を停止
+				   	event.preventDefault();
+				   	 }
+				   	});
+			
+		</script>
 	</div>
 </body>
 </html>

@@ -9,9 +9,9 @@ import com.example.weightGraphApp.form.LoginForm;
 
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping
 public class LoginController {
-	@GetMapping
+	@GetMapping("/login")
 	public String showLogin(@ModelAttribute LoginForm form) {
 		//templatesフォルダ配下のlogin.htmlに遷移
 		return "entry";

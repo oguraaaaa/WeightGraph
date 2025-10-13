@@ -51,4 +51,10 @@ public class WeightGraphServiceImpl implements WeightGraphService {
 		return weightMapper.leatest();
 	}
 
+	@Override
+	public void deleteAll() {
+		weightMapper.deleteAll();
+		
+	}
+
 }

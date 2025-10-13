@@ -21,4 +21,5 @@ public interface WeightRecordMapper {
 	void update(WeightRecord wr);
 	//削除
 	void delete(@Param("id")Integer id);
+	void deleteAll();
 }

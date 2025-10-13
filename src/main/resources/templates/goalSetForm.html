@@ -151,7 +151,7 @@
 				</p>
 	
 	<!--アクション：登録 or 編集-->
-		<form th:action="${goalSetForm.isNew}?@{/weight/goal/save}:@{/weight/goal/update}"
+		<form th:action="${goalSetForm.isNew}?@{/goal/save}:@{/goal/update}"
 			th:object="${goalSetForm}" method="post">
 		
 	<!--タイトル：登録 or 編集-->
