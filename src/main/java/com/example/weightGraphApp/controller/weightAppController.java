@@ -81,6 +81,7 @@ public class weightAppController {
 		        model.addAttribute("WeightRecords", allRecords);
 		    }
 		    if (latestRecord != null && goal != null) {
+		    	model.addAttribute("latest", latestRecord);
 		        model.addAttribute("bwdistance", String.format("%.1f",(goal.getGoalWeight() - latestRecord.getWeight())));
 		    }
 		    if (goal != null) {

@@ -110,8 +110,7 @@
 		style="color:orangered;">完了メッセージ
 		</p>
 	<div th:if="${goal != null and goal.goalWeight != null and leatest != null and leatest.weight != null}"
-	     th:text="'目標体重(' + ${goal.goalWeight} + ' kg)まであと' + ${#numbers.formatDecimal(bwdistance, 1, 1)} + 'kg!!'"
-	     style="color:orangered">
+	     th:text="'目標体重(' + ${goal.goalWeight} + ' kg)まであと' + ${bwdistance} + 'kg!!'" style="color:orangered">
 	</div>
 	<a th:href="@{/weight/form}">今日の体重を記録する</a>
 	
@@ -140,7 +139,7 @@
 				<tr th:each="data:${WeightRecords}">
 					<td th:text="${data.recordDay.format(T(java.time.format.DateTimeFormatter).ofPattern('yyyy/MM/dd'))}"></td>
 					<td th:text="${data.weight} + ' kg'"></td>
-					<td th:text="${data.fat != null ? data.fat + ' ％' : ''}"></td>
+					<td th:text="${data.fat != null ? data.fat + ' ％' : 'ー'}"></td>
 					<td th:text="${data.memo}"></td>
 					<td><a th:href="@{/weight/edit/{id}(id=${data.id})}">編集</a></td>
 					<td><form th:action="@{/weight/delete/{id}(id=${data.id})}" method="post">
