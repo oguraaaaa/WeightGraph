@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService{
 		userMapper.deleteAuth();
 		
 	}
+
+	@Override
+	public long count() {
+		return userMapper.count();
+	}
 	
 	
 

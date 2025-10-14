@@ -43,7 +43,17 @@ public class weightAppController {
 	
 	
 	@GetMapping("/userForm")
-	public String userForm(@ModelAttribute UserForm form){
+	public String userForm(@ModelAttribute UserForm form,RedirectAttributes attributes){
+		 long userCount = userService.count();
+		    if (userCount >= 1) {
+		        // 例外を投げる場合
+		        // throw new IllegalStateException("既にユーザーが登録されています");
+
+		        // メッセージを渡してリダイレクトする場合
+		        attributes.addFlashAttribute("loginmessage", "ユーザーは既に登録されています。\n再登録する場合はログイン後にユーザー情報を削除してください。");
+		        return "redirect:/login";
+		    }
+
 		form.setIsNew(true);
 		return "userForm";
 	}

@@ -25,6 +25,9 @@ VALUES
 
 <delete id = "deleteAuth">
 	DELETE FROM authentications
-</delete>			
+</delete>	
 
+<select id = "count" resultType="long">		
+	SELECT COUNT(id) FROM "user"
+	</select>
 </mapper>

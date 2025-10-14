@@ -8,4 +8,5 @@ public interface UserService {
 	void insertAuth(Authentication auth);
 	void delete();
 	void deleteAuth();
+	long count();
 }

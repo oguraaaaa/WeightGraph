@@ -161,7 +161,7 @@
 			<tr>
 				<th>目標体重(kg)</th>
 				<td>
-					<input type="text" th:field="*{goalWeight}">
+					<input type="text" th:field="*{goalWeight}" placeholder="半角数字で入力">
 					<!--体重用：バリデーションエラー表示-->
 				<span th:if="${#fields.hasErrors('goalWeight')}"
 					th:errors="*{goalWeight}" class="error-msg">
@@ -172,7 +172,7 @@
 			<tr>
 				<th>目標体脂肪率(％)</th>
 				<td>
-					<input type="text" th:field="*{goalFat}">
+					<input type="text" th:field="*{goalFat}" placeholder="半角数字で入力">
 					<!--体脂肪用：バリデーションエラー表示-->
 					<span th:if="${#fields.hasErrors('goalFat')}"
 						th:errors="*{goalFat}" class="error-msg">

@@ -11,4 +11,5 @@ public interface UserMapper {
 	Double insertAuth(Authentication auth);
 	void delete();
 	void deleteAuth();
+	long count();
 }

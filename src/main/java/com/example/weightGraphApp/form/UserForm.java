@@ -1,6 +1,8 @@
 package com.example.weightGraphApp.form;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -16,11 +18,14 @@ public class UserForm {
 	@Size(min=2,max=10,message="2～10文字入力でしてください")
 	private String displayName;
 	@NotNull(message ="必須です。入力して下さい")
+	@Positive(message = "値が不正です")
 	private Double height;
 	@NotNull(message ="必須です。入力して下さい")
+	@Pattern(regexp = "[a-zA-Z0-9]*",message="半角英数字で入力してください")
 	@Size(min=3,max=10,message="3～10文字で入力してください")
 	private String username;
 	@NotNull(message ="必須です。入力して下さい")
+	@Pattern(regexp = "[a-zA-Z0-9]*",message="半角英数字で入力してください")
 	@Size(min=3,max=10,message="3～10文字で入力してください")
 	private String password;
 	private Boolean isNew;

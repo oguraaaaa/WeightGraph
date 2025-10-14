@@ -1,8 +1,8 @@
 package com.example.weightGraphApp.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.weightGraphApp.form.LoginForm;
@@ -18,8 +18,9 @@ public class LoginController {
 	}
 	
 	@GetMapping("/login")
-	public String showLogin(@ModelAttribute LoginForm form) {
-		//templatesフォルダ配下のlogin.htmlに遷移
+	public String showLogin(Model model) {
+		 model.addAttribute("loginForm", new LoginForm());
+		//templatesフォルダ配下のentry.htmlに遷移
 		return "entry";
 	
 }
