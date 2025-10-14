@@ -1,5 +1,8 @@
 package com.example.weightGraphApp.controller;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -98,6 +101,9 @@ public class weightAppController {
 		        model.addAttribute("bwdistance", String.format("%.1f",(goal.getGoalWeight() - latestRecord.getWeight())));
 		    }
 		    if (goal != null) {
+		    	LocalDate now = LocalDate.now();
+		    	long remainday = ChronoUnit.DAYS.between(now,goal.getGoalDay());
+		        model.addAttribute("remainday", remainday);
 		        model.addAttribute("goal", goal);
 		    }
 //
@@ -164,16 +170,7 @@ public class weightAppController {
 				return "redirect:/weight/main";
 			}
 		}
-	//経過日数
-//	@GetMapping("/pass")
-//	public String getTime(Model model) {
-//		LocalDateTime now = LocalDateTime.now();
-//		LocalDate start = Goal.getStartDay();
-//
-//	    model.addAttribute("pass",LocalDateTime.now() - Goal.getStartDay()));
-//	    return "pass";
-//	}
-//
+
 	//情報更新
 	@PostMapping("/update")
 	public String update(@Validated RecordWeightForm form,
