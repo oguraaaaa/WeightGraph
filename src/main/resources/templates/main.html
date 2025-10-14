@@ -157,6 +157,9 @@
 		<form id = "deleteAll" th:action="@{/weight/deleteAll}" method="post">			
 		<button type="submit">全記録を削除</button></form>
 		
+		<form id = "deleteUser" th:action="@{/weight/deleteUser}" method="post">
+		<button type="submit">ユーザデータを削除</button></form>
+		
 		<script>
 			//リンクがあるアンカーの取得
 			       const deleteform = document.getElementById('deleteAll');
@@ -185,6 +188,19 @@
 				   	event.preventDefault();
 				   	 }
 				   	});
+					
+					//リンクがあるアンカーの取得
+   	 const userdeleteform = document.getElementById('deleteUser');
+	 //リンクがクリックされたときの処理
+		userdeleteform.addEventListener('submit', (event) => {
+	 //確認ダイアログの表示
+	    const isOk = confirm('ユーザー情報及び記録データを削除します。\n削除したデータは戻せません。\n本当に削除しますか？');
+	//[キャンセル]が押されたか
+		if(!isOk){
+	//デフォルトの動作（リンクの遷移）を停止
+		event.preventDefault();
+	 }
+		});					
 			
 		</script>
 	</div>

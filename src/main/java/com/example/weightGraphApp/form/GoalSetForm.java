@@ -30,5 +30,10 @@ public class GoalSetForm {
 		@Size(max=50,message="メモは{max}文字以内で入力してください。")
 		private String memo;
 		private Boolean isNew;
+//		
+//		@AssertTrue
+//		public boolean isSafeBw() {
+//			return goalWeight >= User.getLimitBw();
+//		}
 	}
 

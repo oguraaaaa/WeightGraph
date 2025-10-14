@@ -28,7 +28,7 @@ public class SecurityConfig {
 				.requestMatchers("/weight/main").hasAuthority("USER")
 				
 		//「/login」へのアクセスは認証を必要としない		
-		.requestMatchers("/login","/","/weight/**","/images/**").permitAll()
+		.requestMatchers("/login","/weight","/weight/userForm","/weight/noset","/weight/user/save","/goal/**","/images/**","weight/deleteUser").permitAll()
 		//その他のリクエストは認証が必要
 		.anyRequest().authenticated())
 		//★フォームベースのログイン設定

@@ -16,11 +16,15 @@ VALUES
 <!-- 最新データのみ取得 -->
 	<select id ="showHight" resultType="com.example.weightGraphApp.entity.User" >
 		SELECT height 
-		FROM user;	
+		FROM "user";	
 	</select>
 
 <delete id = "delete">
-		DELETE * FROM user WHERE id = #{id}
-	</delete>		
+		DELETE FROM "user"
+	</delete>
+
+<delete id = "deleteAuth">
+	DELETE FROM authentications
+</delete>			
 
 </mapper>

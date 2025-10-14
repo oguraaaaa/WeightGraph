@@ -1,5 +1,8 @@
 package com.example.weightGraphApp.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -193,5 +196,19 @@ public class weightAppController {
 		 weightGraph.deleteAll();
 		 attributes.addFlashAttribute("message","削除しました");
 		 return "redirect:/weight/main";
+	 	}
+	 @PostMapping("/deleteUser")
+	 public String deleteUser(HttpServletRequest request) {
+		 weightGraph.deleteAll();
+		 userService.delete();
+		 userService.deleteAuth();
+		 // 認証情報クリア
+	        SecurityContextHolder.clearContext();
+
+	        // セッション破棄
+	        if (request.getSession(false) != null) {
+	            request.getSession(false).invalidate();
+	        }
+		 return "login";
 	 	}
 }
