@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserService{
 	public long count() {
 		return userMapper.count();
 	}
+
+	@Override
+	public User show() {
+		return userMapper.show();
+	}
 	
 	
 

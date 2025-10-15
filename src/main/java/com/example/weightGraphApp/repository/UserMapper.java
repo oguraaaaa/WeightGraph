@@ -12,4 +12,5 @@ public interface UserMapper {
 	void delete();
 	void deleteAuth();
 	long count();
+	User show();
 }

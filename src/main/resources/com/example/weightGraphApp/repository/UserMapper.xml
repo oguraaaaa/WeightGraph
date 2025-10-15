@@ -30,4 +30,8 @@ VALUES
 <select id = "count" resultType="long">		
 	SELECT COUNT(id) FROM "user"
 	</select>
+	
+<select id = "show" resultType="com.example.weightGraphApp.entity.User"	>
+	SELECT * FROM "user"
+</select>
 </mapper>

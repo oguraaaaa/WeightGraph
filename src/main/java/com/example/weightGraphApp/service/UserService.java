@@ -9,4 +9,5 @@ public interface UserService {
 	void delete();
 	void deleteAuth();
 	long count();
+	User show();
 }

@@ -24,6 +24,11 @@ import lombok.RequiredArgsConstructor;
 public class GoalController {
 	
 	private final GoalService goalService;
+	
+	@ModelAttribute
+	public GoalSetForm setForm() {		
+		return new GoalSetForm();
+	}
 
 	@GetMapping("/goalSet")
 	public String goalSet(@ModelAttribute GoalSetForm form) {
@@ -45,7 +50,7 @@ public class GoalController {
 	}
 	
 	@GetMapping("/edit")
-	public String goalEdit(@ModelAttribute GoalSetForm form, Model model) {
+	public String goalEdit(@ModelAttribute GoalSetForm form, Model model,RedirectAttributes attributes) {
 		Goal target = goalService.leatest();
 		if(target != null) {
 			//対象データがある場合はFormへの変換
@@ -54,8 +59,8 @@ public class GoalController {
 			model.addAttribute("goalSetForm",gform);
 			return "goalSetForm";
 		}else {
-		model.addAttribute("message"," ");
-		return "goalSetForm";
+			form.setIsNew(true);
+			return "goalSetForm";
 		}
 	}
 	

@@ -25,10 +25,11 @@ public class SecurityConfig {
 		//★HTTPリクエストに対するセキュリティ設定
 		.authorizeHttpRequests(authz -> authz
 				// 【管理者権限設定】url:/todos/**は管理者しかアクセスできない
-				.requestMatchers("/weight/main").hasAuthority("USER")
+				.requestMatchers("/weight/main").authenticated()
+				//hasAuthority("USER")
 				
 		//「/login」へのアクセスは認証を必要としない		
-		.requestMatchers("/login","/weight","/weight/userForm","/weight/noset","/weight/user/save","/goal/**","/images/**","weight/deleteUser").permitAll()
+		.requestMatchers("/login","/userForm","/weight/noset","/user/save","/goal/**","/images/**","weight/deleteUser").permitAll()
 		//その他のリクエストは認証が必要
 		.anyRequest().authenticated())
 		//★フォームベースのログイン設定
@@ -56,6 +57,15 @@ public class SecurityConfig {
 		//ログアウト時にCookieを削除する
 		.deleteCookies("JSESSIONID")				
 		);
+//		
+//		http.addFilterBefore(new OncePerRequestFilter() {
+//	        @Override
+//	        protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+//	            System.out.println("RequestURI: " + request.getRequestURI());
+//	            filterChain.doFilter(request, response);
+//	        }
+//	    }, UsernamePasswordAuthenticationFilter.class);
+//		
 		return http.build();
 	}
 }
