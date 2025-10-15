@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 
 public class LoginUser extends User{
 	
+	private  User user;
 	private String displayName;
 	private Double hight;
 //	private Goal goal;

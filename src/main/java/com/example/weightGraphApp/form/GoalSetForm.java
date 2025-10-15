@@ -19,8 +19,7 @@ public class GoalSetForm {
 	
 	
 	
-		@NotNull(message="体重は必須です。")
-		@Range(min = 40,message="瘦せすぎは危険です！")
+		@NotNull(message="体重は必須です。")		
 		private Double goalWeight;
 		@Range(min = 12,message="瘦せすぎは危険です！")
 		private Double goalFat;

@@ -13,7 +13,7 @@ public class UserHelper {
 		User user = new User();
 		user.setHeight(form.getHeight());
 		user.setDisplayName(form.getDisplayName());
-		user.setLimitBw(((form.getHeight()/100)*(form.getHeight()/100))*18.5);
+		user.setLimitBw(((form.getHeight()/100)*(form.getHeight()/100))*18);
 		
 		return user;
 		

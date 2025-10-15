@@ -4,7 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import com.example.weightGraphApp.form.GoalSetForm;
 import com.example.weightGraphApp.form.LoginForm;
 import com.example.weightGraphApp.helper.GoalHelper;
 import com.example.weightGraphApp.service.GoalService;
+import com.example.weightGraphApp.validator.BwValidator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,12 +26,19 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/goal")
 public class GoalController {
 	
+	private final BwValidator bwValidator;
 	private final GoalService goalService;
 	
 	@ModelAttribute
 	public GoalSetForm setForm() {		
-		return new GoalSetForm();
+		return new GoalSetForm();				
 	}
+	
+	//相関チェック登録
+		@InitBinder("goalSetForm")
+		public void initBinder(WebDataBinder webDataBinder) {
+			webDataBinder.addValidators(bwValidator);
+		}
 
 	@GetMapping("/goalSet")
 	public String goalSet(@ModelAttribute GoalSetForm form) {
@@ -45,6 +55,7 @@ public class GoalController {
 		
 		attributes.addFlashAttribute("loginmessage","目標を設定しました。ログインして体重を記録しましょう！");
 		Goal goal = GoalHelper.convertGoal(form);
+		form.setIsNew(true);
 		goalService.insert(goal);
 		return "redirect:/login";
 	}
@@ -56,6 +67,7 @@ public class GoalController {
 			//対象データがある場合はFormへの変換
 			GoalSetForm gform = GoalHelper.convertGoalSetForm(target);
 			//モデルに格納
+			form.setIsNew(false);
 			model.addAttribute("goalSetForm",gform);
 			return "goalSetForm";
 		}else {
@@ -72,8 +84,8 @@ public class GoalController {
 		//入力チェックNG:入力画面を表示する
 		if(bindingResult.hasErrors()) {
 			//更新画面の設定
-			
-			return "form";
+			form.setIsNew(false);
+			return "goalSetForm";
 		}
 		//エンティティへの変換
 		Goal goal = GoalHelper.convertGoal(form);

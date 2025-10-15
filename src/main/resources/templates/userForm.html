@@ -136,7 +136,7 @@
 					<tr>
 						<th>身長(cm)</th>
 						<td>
-							<input type="text" th:field="*{height}">
+							<input type="text" th:field="*{height}" placeholder="半角数字で入力">
 							<!--体重用：バリデーションエラー表示-->
 						<span th:if="${#fields.hasErrors('height')}"
 							th:errors="*{height}" class="error-msg">
