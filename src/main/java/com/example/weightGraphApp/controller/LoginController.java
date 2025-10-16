@@ -17,6 +17,11 @@ public class LoginController {
 		return new LoginForm();
 	}
 	
+	public String Login(@ModelAttribute LoginForm form) {
+		//templatesフォルダ配下のentry.htmlに遷移
+		return "entry";
+	
+}
 	@GetMapping("/login")
 	public String showLogin(@ModelAttribute LoginForm form) {
 		//templatesフォルダ配下のentry.htmlに遷移

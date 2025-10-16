@@ -91,12 +91,12 @@ public class weightAppController {
 	@GetMapping("/main")
 	public String maintPage(Model model) {
 		
-		  User user = userService.show();
+		  User userdata = userService.show();
 		 var allRecords = weightGraph.showAll();
 		    var latestRecord = weightGraph.leatest();
 		    var goal = goalService.leatest();
 		    
-		    model.addAttribute("User", user);
+		    model.addAttribute("User", userdata);
 
 		    if (allRecords != null && !allRecords.isEmpty()) {
 		        model.addAttribute("WeightRecords", allRecords);

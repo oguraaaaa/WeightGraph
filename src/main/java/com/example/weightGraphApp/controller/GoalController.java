@@ -4,9 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,34 +26,36 @@ public class GoalController {
 	
 	private final BwValidator bwValidator;
 	private final GoalService goalService;
-	
-	@ModelAttribute
-	public GoalSetForm setForm() {		
-		return new GoalSetForm();				
-	}
-	
-	//相関チェック登録
-		@InitBinder("goalSetForm")
-		public void initBinder(WebDataBinder webDataBinder) {
-			webDataBinder.addValidators(bwValidator);
-		}
+//	
+//	@ModelAttribute
+//	public GoalSetForm setForm() {		
+//		return new GoalSetForm();				
+//	}
+//	
+//	//相関チェック登録
+//		@InitBinder("goalSetForm")
+//		public void initBinder(WebDataBinder webDataBinder) {
+//			webDataBinder.addValidators(bwValidator);
+//		}
 
 	@GetMapping("/goalSet")
-	public String goalSet(@ModelAttribute GoalSetForm form) {
+	public String goalSet(Model model) {
+		GoalSetForm form = new GoalSetForm();
+		model.addAttribute("goalSetForm", form);
 		form.setIsNew(true);
 		return "goalSetForm";
 	}
 	//
 	@PostMapping("/save")
-	public String goalSave(@Validated GoalSetForm form,BindingResult bindingResult,@ModelAttribute LoginForm logform,RedirectAttributes attributes) {
+	public String goalSave(@Validated GoalSetForm form,BindingResult bindingResult,@ModelAttribute LoginForm logform,Model model,RedirectAttributes attributes) {
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("goalSetForm", form);
 			form.setIsNew(true);
 			return "goalSetForm";
 		}
 		
 		attributes.addFlashAttribute("loginmessage","目標を設定しました。ログインして体重を記録しましょう！");
 		Goal goal = GoalHelper.convertGoal(form);
-		form.setIsNew(true);
 		goalService.insert(goal);
 		return "redirect:/login";
 	}
@@ -71,19 +71,20 @@ public class GoalController {
 			model.addAttribute("goalSetForm",gform);
 			return "goalSetForm";
 		}else {
-			form.setIsNew(true);
+			form.setIsNew(false);
 			return "goalSetForm";
 		}
 	}
 	
 	@PostMapping("/update")
 	public String goalpdate(@Validated GoalSetForm form,
-			BindingResult bindingResult,
+			BindingResult bindingResult,Model model,
 			RedirectAttributes attributes) {
 		//===バリデーションチェック===
 		//入力チェックNG:入力画面を表示する
 		if(bindingResult.hasErrors()) {
 			//更新画面の設定
+			model.addAttribute("goalSetForm", form);
 			form.setIsNew(false);
 			return "goalSetForm";
 		}
