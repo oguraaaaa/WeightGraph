@@ -8,6 +8,7 @@
 	
 	/* 吹き出し＋アイコンの親：右上に浮かせて表示 */
 	.bubble-float {
+	  margin-right: 8.0rem;
 	  position: absolute;
 	  top: 0;
 	  right: 0;
@@ -15,8 +16,8 @@
 	  align-items: center;
 	  justify-content: flex-end;
 	  background: url("/images/e1416_1.png") no-repeat center center / contain;
-	  width: 220px;
-	  height: 60px;
+	  width: 300px;
+	  height: 100px;
 	  padding: 0 0.5rem 0 2rem;
 	  box-sizing: border-box;
 	  z-index: 10;
@@ -32,8 +33,8 @@
 
 	/* アイコン画像 */
 	.bubble-icon {
-	  width: 40px;
-	  height: 40px;
+	  width: 60px;
+	  height: 60px;
 	  border-radius: 50%;
 	  object-fit: cover;
 	  margin-left: 0.5rem;
@@ -206,12 +207,12 @@
 		style="color:orangered;">完了メッセージ
 	</p>
 
-	<div th:if="${remainday}" th:text="${goal.goalDay} + 'まであと'+${remainday}+'日'"></div>
+	<div th:if="${remainday}" th:text="|${goal.goalDay}まであと${remainday}日|"></div>
 	<div th:if="${bwdistance}"
-	     th:text="'目標体重まであと' + ${bwdistance} + 'kg!!'" style="color:orangered">
+	     th:text="|目標体重まであと${bwdistance}kg!!|" style="color:orangered">
+	
 	</div>
 	<a th:href="@{/weight/form}">今日の体重を記録する</a>
-	</div>
 	
 	<!--
 	<div th:if="@{goal.goalWeight} and @{leatest.weight}"th:text="'目標体重(' + ${goal.goalWeight} + ' kg)まであと' + (${leatest.weight} - ${goal.goalWeight}) + 'kg!!'"
@@ -220,10 +221,11 @@
 		style = "color:blue"></div>
 	-->
 		<a th:href="@{/weight/chart}">グラフで見る</a>
+	</div>
 		<div class="bubble-float">
-		   <div class="bubble-message" th:text="${User.displayName} + ' さん、こんにちは！'"></div>
-		   <img src="/images/nikukyuneko.png" alt="アイコン" class="bubble-icon">
-		 </div>
+		   <div class="bubble-message" th:text="${User.displayName} + 'さん、こんにちは！'"></div>
+		   <img src="/images/nikukyuneko.png" alt="アイコン" class="bubble-icon"></div>
+		 
 	<!--	
 	<div class="kasaneru">
 	  <div class="message" th:text="${User.displayName} + ' さん、こんにちは！'"></div>

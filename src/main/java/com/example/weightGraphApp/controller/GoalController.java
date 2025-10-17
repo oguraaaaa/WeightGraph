@@ -55,6 +55,7 @@ public class GoalController {
 		}
 		
 		attributes.addFlashAttribute("loginmessage","目標を設定しました。ログインして体重を記録しましょう！");
+		model.addAttribute("LoginForm", form);
 		Goal goal = GoalHelper.convertGoal(form);
 		goalService.insert(goal);
 		return "redirect:/login";
