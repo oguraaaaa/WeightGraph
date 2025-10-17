@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.weightGraphApp.entity.User;
 import com.example.weightGraphApp.entity.WeightRecord;
 import com.example.weightGraphApp.form.RecordWeightForm;
+import com.example.weightGraphApp.form.UserForm;
 import com.example.weightGraphApp.helper.WeightHelper;
 import com.example.weightGraphApp.service.GoalService;
 import com.example.weightGraphApp.service.UserService;
@@ -83,8 +84,9 @@ public class weightAppController {
 //	
 	
 	@GetMapping("/noset")
-	public String nosetStart(RedirectAttributes attributes) {
+	public String nosetStart(@ModelAttribute UserForm form,RedirectAttributes attributes,Model model) {
 		attributes.addFlashAttribute("loginmessage","ログインして体重を記録しましょう！");
+		model.addAttribute("UserForm",form);
 		return "redirect:/login";
 	}
 	
